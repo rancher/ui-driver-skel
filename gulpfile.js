@@ -66,8 +66,8 @@ gulp.task('templates', ['js'], function() {
 gulp.task('build', ['templates'], function() {
   return gulp.src([`${TMP}/*.js`])
   .pipe(wrapAmd({
-    deps: ['exports'],          // dependency array
-    params: ['exports'],        // params for callback
+    deps: ['exports', 'ember', 'ui/mixins/driver'],          // dependency array
+    params: ['exports', '_ember', '_uiMixinsDriver'],        // params for callback
     moduleRoot: 'component/',
     modulePrefix: 'ui/components/drivers/'
   }))
