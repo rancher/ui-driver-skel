@@ -1,4 +1,3 @@
-"use strict";
 /* jshint node: true */
 const gulp        = require('gulp');
 const clean       = require('gulp-clean');
@@ -19,6 +18,7 @@ if (!DRIVER_NAME) {
   console.log('Please include a driver name with the --name flag');
   return false;
 }
+
 gulp.task('server', ['build'], function() {
   return gulpConnect.server({
     root: [DIST],
@@ -43,13 +43,11 @@ gulp.task('js', ['clean'], function() {
 });
 
 gulp.task('templates', ['js'], function() {
-  // Load templates from the source/templates/ folder relative to where gulp was executed
   return gulp.src('components/**/*.hbs')
-  // Compile each Handlebars template source file to a template function using Ember's Handlebars
   .pipe(htmlbars({compiler: emCompiler}))
   .pipe(wrapAmd({
-    deps: ['exports', 'ember', 'ui/mixins/driver'],          // dependency array
-    params: ['exports', '_ember', '_uiMixinsDriver'],        // params for callback
+    deps: ['exports', 'ember', 'ui/mixins/driver'],
+    params: ['exports', '_ember', '_uiMixinsDriver'],
     moduleRoot: 'component/',
     modulePrefix: 'ui/components/drivers/'
   }))
@@ -59,9 +57,7 @@ gulp.task('templates', ['js'], function() {
   .pipe(replace(
     '../components', DRIVER_NAME
   ))
-  // Concatenate down to a single file
   .pipe(gulpConcat('template.js'), {newLine: ';\n'})
-  // Write the output into the templates folder
   .pipe(gulp.dest(TMP));
 });
 
