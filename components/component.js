@@ -8,7 +8,8 @@ define('ui/components/drivers/<driver-name>/component', ['exports', 'ember', 'ui
      //Write your componet here
     driverName: '<your-driver-name>',
     bootstrap: (function () {
-       /*do stuff on init if you want*/
+      /*Please place your styles on to the page with a custom script tag here.*/
+      /*_ember['default'].$('<style>.your-styles-here{}</style>').appendTo('body');*/
     }).on('init')
     // Normal ember component hooks and methods apply above
   });
