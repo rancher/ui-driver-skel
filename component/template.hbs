@@ -1,0 +1,35 @@
+<section class="horizontal-form">
+  <div class="container-fluid">
+    {{!-- This partial contains the quantity, name, and description fields --}}
+    {{partial "host/add-common"}}
+
+    <div class="over-hr r-mt20 r-mb20">
+      <span>My Skeleton Driver</span>
+    </div>
+
+    {{!-- An example input option --}}
+    <div class="row">
+      <div class="col-sm-12 col-md-2 form-label">
+        <label class="form-control-static">Size</label>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <div class="input-group">
+          {{input type="text"
+            class="form-control"
+            value=model.%%DRIVERNAME%%Config.size
+          }}
+          <span class="input-group-addon">MB</span>
+        </div>
+      </div>
+    </div>
+
+    {{!-- This partial contains the Labels and Advanced Options fields --}}
+    {{partial "host/add-options"}}
+  </div>
+
+  {{!-- This component shows errors produced by validate() in the component --}}
+  {{top-errors errors=errors}}
+
+  {{!-- This component shows the Create and Cancel buttons --}}
+  {{save-cancel save="save" cancel="cancel"}}
+</section>
