@@ -1,9 +1,9 @@
 /* v----- Do not change anything between here
  *       (the DRIVERNAME placeholder will be automatically replaced during build) */
-define('ui/components/drivers/driver-%%DRIVERNAME%%/component', ['exports', 'ember', 'ui/mixins/driver'], function (exports, _ember, _uiMixinsDriver) {
+define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'ember', 'ui/mixins/driver'], function (exports, _ember, _uiMixinsDriver) {
 
   exports['default'] = _ember['default'].Component.extend(_uiMixinsDriver['default'], {
-    driverName: 'driver-%%DRIVERNAME%%',
+    driverName: '%%DRIVERNAME%%',
 /* ^--- And here */
 
     // Write your component here, starting with setting 'model' to a machine with your config populated

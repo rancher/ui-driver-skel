@@ -72,7 +72,7 @@ gulp.task('compiled', ['js'], function() {
     deps: ['exports', 'ember', 'ui/mixins/driver'],
     params: ['exports', '_ember', '_uiMixinsDriver'],
     moduleRoot: 'component/',
-    modulePrefix: 'ui/components/drivers/driver-' + DRIVER_NAME + '/'
+    modulePrefix: 'ui/components/machine/driver-' + DRIVER_NAME + '/'
   }))
   .pipe(replace(
     "return Ember.TEMPLATES['template']", 'exports["default"]'
