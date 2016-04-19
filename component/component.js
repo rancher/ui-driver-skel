@@ -17,7 +17,7 @@ define('ui/components/drivers/driver-%%DRIVERNAME%%/component', ['exports', 'emb
         type: 'machine',
         '%%DRIVERNAME%%Config': config,
       }));
-    }.on('init'),
+    },
 
     // Add custom validation beyond what can be done from the config API schema
     validate() {
