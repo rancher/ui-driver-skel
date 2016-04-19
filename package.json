@@ -1,18 +1,24 @@
 {
-  "name": "ui-custom-driver-composer",
+  "name": "ui-driver-skel",
   "version": "0.0.1",
-  "description": "A small utility to build custom UI for custom drivers added to the Rancher UI project",
+  "description": "Skeleton Rancher UI driver for custom docker-machine drivers",
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/westlywright/ui-custom-driver-composer.git"
+    "url": "git+https://github.com/rancher/ui-driver-skel.git"
   },
-  "author": "",
-  "license": "MIT",
+  "author": "Rancher Labs, Inc.",
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/westlywright/ui-custom-driver-composer/issues"
+    "url": "https://github.com/rancher/rancher/issues"
   },
-  "homepage": "https://github.com/westlywright/ui-custom-driver-composer#readme",
+  "scripts": {
+    "start": "./node_modules/.bin/gulp server",
+    "clean": "./node_modules/.bin/gulp clean",
+    "build": "./node_modules/.bin/gulp build",
+    "upload": "./scripts/upload"
+  },
+  "homepage": "https://github.com/rancher/ui-driver-skel#readme",
   "devDependencies": {
     "del": "^2.2.0",
     "gulp": "^3.9.1",
