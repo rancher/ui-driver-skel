@@ -15,7 +15,7 @@ Skeleton Rancher UI driver for custom docker-machine drivers
 This package contains a small web-server that will serve up the custom driver UI at `https://localhost:3000/component.js`.  You can run this while developing and point the Rancher settings there.
 * `npm start`
 * The driver name can be optionally overridden: `npm start -- --name=DRIVERNAME`
-* The compiled files are viewable at `https://localhost:3000`.
+* The compiled files are viewable at http://localhost:3000.
 * **Note:** The development server does not currently automatically restart when files are changed.
 
 ## Building
@@ -25,7 +25,6 @@ For other users to see your driver, you need to build it and host the output on 
 * `npm build`
 * Copy the contents of the `dist` directory onto a webserver.
   * If your Rancher is configured to use HA or SSL, the server must also be available via HTTPS.
-  * If your driver is public, [GitHub release binaries](https://help.github.com/articles/about-releases/) are a simple hosting choice.
 
 ## Using
 
