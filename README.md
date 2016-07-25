@@ -1,5 +1,5 @@
-# ui-driver-skel
-Skeleton Rancher UI driver for custom docker-machine drivers
+# ui-driver-cloudstack
+Rancher UI driver for Cloudstack docker-machine drivers
 
 ## Setup
 
