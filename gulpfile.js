@@ -11,7 +11,6 @@ const argv        = require('yargs').argv;
 const pkg         = require('./package.json');
 
 const NAME_TOKEN  = '%%DRIVERNAME%%';
-const NAME_LOWER_TOKEN  = '%%DRIVERLOWERNAME%%';
 
 const BASE        = 'component/';
 const DIST        = 'dist/';
@@ -32,7 +31,7 @@ gulp.task('server', ['build'], function() {
   return gulpConnect.server({
     root: [DIST],
     port: process.env.PORT || 3000,
-    https: true
+    https: false
   });
 });
 

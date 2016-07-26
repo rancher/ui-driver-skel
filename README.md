@@ -12,7 +12,7 @@ Skeleton Rancher UI driver for custom docker-machine drivers
 
 ## Development
 
-This package contains a small web-server that will serve up the custom driver UI at `https://localhost:3000/component.js`.  You can run this while developing and point the Rancher settings there.
+This package contains a small web-server that will serve up the custom driver UI at `http://localhost:3000/component.js`.  You can run this while developing and point the Rancher settings there.
 * `npm start`
 * The driver name can be optionally overridden: `npm start -- --name=DRIVERNAME`
 * The compiled files are viewable at http://localhost:3000.
