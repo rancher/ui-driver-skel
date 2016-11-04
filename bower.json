@@ -17,6 +17,6 @@
     "tests"
   ],
   "dependencies": {
-    "ember": "^2.5.0"
+    "ember": "^2.9.1"
   }
 }
