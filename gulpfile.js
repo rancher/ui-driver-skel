@@ -27,7 +27,11 @@ if (!DRIVER_NAME) {
 
 gulp.task('default', ['build']);
 
-gulp.task('server', ['build'], function() {
+gulp.task('watch', function() {
+  gulp.watch(['./component/*.js', './component/*.hbs', './component/*.css'], ['build']);
+});
+
+gulp.task('server', ['build', 'watch'], function() {
   return gulpConnect.server({
     root: [DIST],
     port: process.env.PORT || 3000,
@@ -83,5 +87,6 @@ gulp.task('compiled', ['js'], function() {
 gulp.task('build', ['compiled','css','assets'], function() {
   return gulp.src([`${TMP}/*.js`])
   .pipe(gulpConcat('component.js',{newLine: ';\n'}))
-  .pipe(gulp.dest(DIST));
+  .pipe(gulp.dest(DIST))
+  .pipe(gulpConnect.reload());
 });
