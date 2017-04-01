@@ -1,5 +1,5 @@
-# ui-driver-skel
-Skeleton Rancher UI driver for custom docker-machine drivers
+# ui-driver-ecl2
+Rancher UI driver for ECL2.0
 
 ## Setup
 

@@ -10,7 +10,19 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
     bootstrap: function() {
       let config = this.get('store').createRecord({
         type        : '%%DRIVERNAME%%Config',
-        size        : 512,
+        authUrl: '',
+        domainID: '',
+        flavorName: '',
+        imageId: '',
+        ipVersion: 4,
+        keypairName: '',
+        netId: '',
+        password: '',
+        privateKeyFile: '',
+        sshPort: 22,
+        sshUser: 'root',
+        tenantId: '',
+        username: '',
       });
 
       let type = 'host';
