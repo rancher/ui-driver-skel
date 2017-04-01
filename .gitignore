@@ -18,4 +18,4 @@ testem.log
 .DS_Store
 .tern-port
 
-.idea
+.idea/

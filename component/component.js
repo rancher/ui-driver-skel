@@ -23,6 +23,7 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
         sshUser: 'root',
         tenantId: '',
         username: '',
+        userDataFile: '',
       });
 
       let type = 'host';
