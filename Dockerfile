@@ -9,5 +9,4 @@ RUN npm install gulp -g
 RUN git clone https://github.com/mittz/ui-driver-ecl2.git
 WORKDIR /ui-driver-ecl2
 RUN npm install && bower install --allow-root
-
 RUN npm run build
