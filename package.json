@@ -1,15 +1,15 @@
 {
-  "name": "ui-driver-ecl2",
-  "version": "0.0.1",
-  "description": "Rancher UI driver for ECL2.0",
+  "name": "ui-driver-ecl",
+  "version": "1.0.0",
+  "description": "Rancher UI driver for Enterprise Cloud",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mittz/ui-driver-ecl2.git"
+    "url": "git+https://github.com/mittz/ui-driver-ecl.git"
   },
   "author": "Hayahito Kawamitsu",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/mittz/ui-driver-ecl2/issues"
+    "url": "https://github.com/mittz/ui-driver-ecl/issues"
   },
   "scripts": {
     "start": "./node_modules/.bin/gulp server",
@@ -17,7 +17,7 @@
     "build": "./node_modules/.bin/gulp build",
     "upload": "./scripts/upload"
   },
-  "homepage": "https://github.com/mittz/ui-driver-ecl2#readme",
+  "homepage": "https://github.com/mittz/ui-driver-ecl#readme",
   "devDependencies": {
     "del": "^2.2.0",
     "gulp": "^3.9.1",

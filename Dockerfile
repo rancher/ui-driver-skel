@@ -6,7 +6,7 @@ RUN apk add --update git
 RUN npm install bower -g
 RUN npm install gulp -g
 
-RUN git clone https://github.com/mittz/ui-driver-ecl2.git
-WORKDIR /ui-driver-ecl2
+RUN git clone https://github.com/mittz/ui-driver-ecl.git
+WORKDIR /ui-driver-ecl
 RUN npm install && bower install --allow-root
 RUN npm run build
