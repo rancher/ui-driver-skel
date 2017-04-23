@@ -14,7 +14,6 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
         tenantId: '',
         username: '',
         password: '',
-        domainID: 'default',
         flavorName: '2CPU-8GB',
         imageId: '',
         netId: '',
