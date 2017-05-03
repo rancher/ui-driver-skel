@@ -7,25 +7,18 @@
         <span>ACCOUNT ACCESS</span>
       </div>
 
-      <div class="row">
-        <div class="col-sm-12 col-md-2 form-label">
-          <label class="form-control-static">Auth URL</label>
+      <div class="row form-group">
+        <div class="col-md-2 form-label">
+          <label class="form-control-static">Auth URL*</label>
         </div>
-        <div class="col-sm-12 col-md-4">
-          <div class="input-group col-md-8">
-            {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.authUrl }}
-          </div>
+        <div class="col-md-4">
+          {{input type="text" class="form-control" placeholder="https://keystone-[region]-ecl.api.ntt.com/v3/" value=model.%%DRIVERNAME%%Config.authUrl }}
         </div>
-      </div>
-      
-      <div class="row">
-        <div class="col-sm-12 col-md-2 form-label">
-          <label class="form-control-static">Tenant ID</label>
+        <div class="col-md-2 form-label">
+          <label class="form-control-static">Tenant ID*</label>
         </div>
-        <div class="col-sm-12 col-md-4">
-          <div class="input-group col-md-8">
-            {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.tenantId }}
-          </div>
+        <div class="col-md-4">
+          {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.tenantId }}
         </div>
       </div>
       
