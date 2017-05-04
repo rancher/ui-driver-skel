@@ -19,6 +19,7 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
         netId: '',
         sshPort: 22,
         sshUser: 'root',
+        availabilityZone: '',
         userDataFile: '',
       });
 
