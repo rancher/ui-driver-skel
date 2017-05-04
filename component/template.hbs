@@ -3,97 +3,96 @@
     {{!-- This partial contains the quantity, name, and description fields --}}
     {{partial "host/add-common"}}
 
-      <div class="over-hr r-mt20 r-mb20">
-        <span>ACCOUNT ACCESS</span>
-      </div>
+    <div class="over-hr r-mt20 r-mb20">
+      <span>ACCOUNT ACCESS</span>
+    </div>
 
-      <div class="row form-group">
-        <div class="col-md-2 form-label">
-          <label class="form-control-static">Auth URL*</label>
-        </div>
-        <div class="col-md-4">
-          {{input type="text" class="form-control" placeholder="https://keystone-[region]-ecl.api.ntt.com/v3/" value=model.%%DRIVERNAME%%Config.authUrl }}
-        </div>
-        <div class="col-md-2 form-label">
-          <label class="form-control-static">Tenant ID*</label>
-        </div>
-        <div class="col-md-4">
-          {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.tenantId }}
-        </div>
+    <div class="row form-group">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">Auth URL*</label>
       </div>
-      
-      <div class="row form-group">
-        <div class="col-md-2 form-label">
-          <label class="form-control-static">Username*</label>
-        </div>
-        <div class="col-md-4">
-          {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.username }}
-        </div>
-        </div>
-        <div class="col-md-2 form-label">
-          <label class="form-control-static">Password*</label>
-        </div>
-        <div class="col-md-4">
-          {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.password }}
-        </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" placeholder="https://keystone-[region]-ecl.api.ntt.com/v3/" value=model.%%DRIVERNAME%%Config.authUrl }}
       </div>
-      
-      <div class="over-hr r-mt20 r-mb20">
-        <span>INSTANCE</span>
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">Tenant ID*</label>
       </div>
-      
-      <div class="row form-group">
-        <div class="col-md-2 form-label">
-          <label class="form-control-static">Flavor Name*</label>
-        </div>
-        <div class="col-md-4">
-          {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.flavorName }}
-        </div>
-        <div class="col-md-2 form-label">
-          <label class="form-control-static">Image ID*</label>
-        </div>
-        <div class="col-md-4">
-          {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.imageId }}
-        </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.tenantId }}
       </div>
-      
-      <div class="row form-group">
-        <div class="col-md-2 form-label">
-          <label class="form-control-static">SSH Port</label>
-        </div>
-        <div class="col-md-4">
-          {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.sshPort }}
-        </div>
-        <div class="col-md-2 form-label">
-          <label class="form-control-static">SSH User</label>
-        </div>
-        <div class="col-md-4">
-          {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.sshUser }}
-        </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">Username*</label>
       </div>
-      
-      <div class="row form-group">
-        <div class="col-md-2 form-label">
-          <label class="form-control-static">Network ID*</label>
-        </div>
-        <div class="col-md-4">
-          {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.netId }}
-        </div>
-        <div class="col-md-2 form-label">
-          <label class="form-control-static">User Data</label>
-        </div>
-        <div class="col-md-4">
-          {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.userDataFile }}
-        </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.username }}
       </div>
-      
-      {{!-- This partial contains the Labels and Advanced Options fields --}}
-      {{partial "host/add-options"}}
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">Password*</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.password }}
+      </div>
+    </div>
+
+    <div class="over-hr r-mt20 r-mb20">
+      <span>INSTANCE</span>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">Flavor Name*</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.flavorName }}
+      </div>
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">Image ID*</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.imageId }}
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">SSH Port</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.sshPort }}
+      </div>
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">SSH User</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.sshUser }}
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">Network ID*</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.netId }}
+      </div>
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">User Data</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.userDataFile }}
+      </div>
+    </div>
+
+    {{!-- This partial contains the Labels and Advanced Options fields --}}
+    {{partial "host/add-options"}}
   </div>
 
   {{!-- This component shows errors produced by validate() in the component --}}
   {{top-errors errors=errors}}
 
-    {{!-- This component shows the Create and Cancel buttons --}}
-    {{save-cancel save="save" cancel="cancel" }}
+  {{!-- This component shows the Create and Cancel buttons --}}
+  {{save-cancel save="save" cancel="cancel" }}
 </section>
