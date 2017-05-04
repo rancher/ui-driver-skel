@@ -86,13 +86,15 @@
       </div>
     </div>
     
-    <div class="col-md-2 form-label">
-      <label class="form-control-static">User Data</label>
+    <div class="row form-group">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">User Data</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.userDataFile }}
+      </div>
     </div>
-    <div class="col-md-4">
-      {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.userDataFile }}
-    </div>
-
+    
     {{!-- This partial contains the Labels and Advanced Options fields --}}
     {{partial "host/add-options"}}
   </div>
