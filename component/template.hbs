@@ -9,13 +9,13 @@
 
     <div class="row form-group">
       <div class="col-md-2 form-label">
-        <label class="form-control-static">Auth URL*</label>
+        <label class="form-control-static">{{t 'machine.driverEcl.accountAccess.apiEndpoint'}}</label>
       </div>
       <div class="col-md-4">
         {{input type="text" class="form-control" placeholder="https://keystone-[region]-ecl.api.ntt.com/v3/" value=model.%%DRIVERNAME%%Config.authUrl }}
       </div>
       <div class="col-md-2 form-label">
-        <label class="form-control-static">Tenant ID*</label>
+        <label class="form-control-static">{{t 'machine.driverEcl.accountAccess.tenantId'}}</label>
       </div>
       <div class="col-md-4">
         {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.tenantId }}
@@ -24,13 +24,13 @@
 
     <div class="row form-group">
       <div class="col-md-2 form-label">
-        <label class="form-control-static">Username*</label>
+        <label class="form-control-static">{{t 'machine.driverEcl.accountAccess.username'}}</label>
       </div>
       <div class="col-md-4">
         {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.username }}
       </div>
       <div class="col-md-2 form-label">
-        <label class="form-control-static">Password*</label>
+        <label class="form-control-static">{{t 'machine.driverEcl.accountAccess.password'}}</label>
       </div>
       <div class="col-md-4">
         {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.password }}
@@ -43,13 +43,13 @@
 
     <div class="row form-group">
       <div class="col-md-2 form-label">
-        <label class="form-control-static">Flavor Name*</label>
+        <label class="form-control-static">{{t 'machine.driverEcl.instance.flavorName'}}</label>
       </div>
       <div class="col-md-4">
         {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.flavorName }}
       </div>
       <div class="col-md-2 form-label">
-        <label class="form-control-static">Image ID*</label>
+        <label class="form-control-static">{{t 'machine.driverEcl.instance.imageId'}}</label>
       </div>
       <div class="col-md-4">
         {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.imageId }}
@@ -58,13 +58,13 @@
 
     <div class="row form-group">
       <div class="col-md-2 form-label">
-        <label class="form-control-static">SSH Port</label>
+        <label class="form-control-static">{{t 'machine.driverEcl.instance.sshPort'}}</label>
       </div>
       <div class="col-md-4">
         {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.sshPort }}
       </div>
       <div class="col-md-2 form-label">
-        <label class="form-control-static">SSH User</label>
+        <label class="form-control-static">{{t 'machine.driverEcl.instance.sshUser'}}</label>
       </div>
       <div class="col-md-4">
         {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.sshUser }}
@@ -73,13 +73,13 @@
 
     <div class="row form-group">
       <div class="col-md-2 form-label">
-        <label class="form-control-static">Network ID*</label>
+        <label class="form-control-static">{{t 'machine.driverEcl.instance.networkId'}}</label>
       </div>
       <div class="col-md-4">
         {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.netId }}
       </div>
       <div class="col-md-2 form-label">
-        <label class="form-control-static">Availability Zone</label>
+        <label class="form-control-static">{{t 'machine.driverEcl.instance.availabilityZone'}}</label>
       </div>
       <div class="col-md-4">
         {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.availabilityZone }}
@@ -88,7 +88,7 @@
     
     <div class="row form-group">
       <div class="col-md-2 form-label">
-        <label class="form-control-static">User Data File</label>
+        <label class="form-control-static">{{t 'machine.driverEcl.instance.userDataFile'}}</label>
       </div>
       <div class="col-md-4">
         {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.userDataFile }}
