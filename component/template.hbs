@@ -4,25 +4,97 @@
     {{partial "host/add-common"}}
 
     <div class="over-hr r-mt20 r-mb20">
-      <span>My Skeleton Driver</span>
+      <span>ACCOUNT ACCESS</span>
     </div>
 
-    {{!-- An example input option --}}
-    <div class="row">
-      <div class="col-sm-12 col-md-2 form-label">
-        <label class="form-control-static">Size</label>
+    <div class="row form-group">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">{{t 'machine.driverEcl.accountAccess.apiEndpoint'}}</label>
       </div>
-      <div class="col-sm-12 col-md-4">
-        <div class="input-group">
-          {{input type="text"
-            class="form-control"
-            value=model.%%DRIVERNAME%%Config.size
-          }}
-          <span class="input-group-addon">MB</span>
-        </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" placeholder="https://keystone-[region]-ecl.api.ntt.com/v3/" value=model.%%DRIVERNAME%%Config.authUrl }}
+      </div>
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">{{t 'machine.driverEcl.accountAccess.tenantId'}}</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.tenantId }}
       </div>
     </div>
 
+    <div class="row form-group">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">{{t 'machine.driverEcl.accountAccess.username'}}</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.username }}
+      </div>
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">{{t 'machine.driverEcl.accountAccess.password'}}</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.password }}
+      </div>
+    </div>
+
+    <div class="over-hr r-mt20 r-mb20">
+      <span>INSTANCE</span>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">{{t 'machine.driverEcl.instance.flavorName'}}</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.flavorName }}
+      </div>
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">{{t 'machine.driverEcl.instance.imageId'}}</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.imageId }}
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">{{t 'machine.driverEcl.instance.sshPort'}}</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.sshPort }}
+      </div>
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">{{t 'machine.driverEcl.instance.sshUser'}}</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.sshUser }}
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">{{t 'machine.driverEcl.instance.networkId'}}</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.netId }}
+      </div>
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">{{t 'machine.driverEcl.instance.availabilityZone'}}</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.availabilityZone }}
+      </div>
+    </div>
+    
+    <div class="row form-group">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">{{t 'machine.driverEcl.instance.userDataFile'}}</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text" class="form-control" value=model.%%DRIVERNAME%%Config.userDataFile }}
+      </div>
+    </div>
+    
     {{!-- This partial contains the Labels and Advanced Options fields --}}
     {{partial "host/add-options"}}
   </div>
@@ -31,5 +103,5 @@
   {{top-errors errors=errors}}
 
   {{!-- This component shows the Create and Cancel buttons --}}
-  {{save-cancel save="save" cancel="cancel"}}
+  {{save-cancel save="save" cancel="cancel" }}
 </section>
