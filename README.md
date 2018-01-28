@@ -1,4 +1,7 @@
 # ui-driver-skel
+
+[![Build Status](https://travis-ci.org/maxibanki/ui-driver-hetzner.svg?branch=master)](https://travis-ci.org/maxibanki/ui-driver-hetzner)
+
 Skeleton Rancher UI driver for custom docker-machine drivers
 
 ## Setup
