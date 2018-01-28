@@ -1,6 +1,10 @@
 language: node_js
+node_js:
+  - node
 script:
-  - npm build
+  - yarn global add bower
+  - bower install
+  - yarn build
 deploy:
   provider: pages
   github-token: $GITHUB_TOKEN
