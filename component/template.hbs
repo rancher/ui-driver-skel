@@ -30,7 +30,7 @@
 
         <div class="row">
           <label class="acc-label">{{t 'machine.driverDigitalocean.region.label'}}</label>
-          <select class="form-control" onchange={{action (mut hetznerConfig.serverLocation) value="target.value"}}>
+          <select class="form-control" onchange={{action (mut model.hetznerConfig.serverLocation) value="target.value"}}>
             {{#each regionChoices as |choice|}}
               <option value={{choice.name}} selected={{eq hetznerConfig.serverLocation choice.slug}}>{{choice.city}}</option>
             {{/each}}
@@ -43,7 +43,7 @@
         <div class="row">
           <div class="col span-4">
             <label class="acc-label">{{t 'machine.driverDigitalocean.image.label'}}</label>
-            <select class="form-control" onchange={{action (mut hetznerConfig.image) value="target.value"}}>
+            <select class="form-control" onchange={{action (mut model.hetznerConfig.image) value="target.value"}}>
               {{#each imageChoices as |choice|}}
                 <option value={{choice.name}} disabled={{choice.disabled}} selected={{eq hetznerConfig.image choice.slug}}>{{choice.description}}</option>
               {{/each}}
@@ -52,7 +52,7 @@
 
           <div class="col span-4">
             <label class="acc-label">{{t 'machine.driverDigitalocean.size.label'}}</label>
-            <select class="form-control" onchange={{action (mut hetznerConfig.serverType) value="target.value"}}>
+            <select class="form-control" onchange={{action (mut model.hetznerConfig.serverType) value="target.value"}}>
               {{#each sizeChoices as |choice|}}
                 <option value={{choice.name}} selected={{eq hetznerConfig.serverType choice.slug}}>{{choice.description}} - {{choice.memory}}GB Memory - {{choice.disk}}GB Disk space</option>
               {{/each}}

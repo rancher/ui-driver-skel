@@ -11,8 +11,9 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
     bootstrap: function () {
       let config = this.get('store').createRecord({
         type: '%%DRIVERNAME%%Config',
-        size: 512,
         apiToken: '',
+        serverType: "",
+        serverLocation: ""
       });
 
       let type = 'host';
@@ -50,7 +51,7 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
       //   this.set('errors', null);
       //   return true;
       // }
-      let apiToken = this.get('hetznerConfig.apiToken') || '';
+      let apiToken = this.get('model.hetznerConfig.apiToken') || '';
       if (apiToken && apiToken.length !== 64) {
         errors.push("That doesn't look like a valid access token");
       }

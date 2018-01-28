@@ -1,8 +1,8 @@
-# ui-driver-skel
+# Rancher Hetzner Cloud UI Driver
 
 [![Build Status](https://travis-ci.org/maxibanki/ui-driver-hetzner.svg?branch=master)](https://travis-ci.org/maxibanki/ui-driver-hetzner)
 
-Skeleton Rancher UI driver for custom docker-machine drivers
+Rancher UI driver for the [Hetzner Cloud](hetzner.de/cloud)
 
 ## Setup
 
