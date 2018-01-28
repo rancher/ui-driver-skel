@@ -4,11 +4,13 @@
       <div class="over-hr r-mb20">
         <span>Account Access</span>
       </div>
-        <div class="box mt-20">
-          <div class="row">
-            <label class="acc-label">Access Token*</label>
+        <div class="row form-group">
+          <div class="col-md-2">
+              <label class="form-control-static">Access Token*</label>
+          </div>
+          <div class="col-md-10">
             {{input type="password" value=model.hetznerConfig.apiToken classNames="form-control" placeholder="Your Hetzner Cloud API access token"}}
-            <p class="text-info">Personal Access Token from one of your Hetzner Cloud Projects.</p>
+            <p class="help-block">Personal Access Token from one of your Hetzner Cloud Projects.</p>
           </div>
         </div>
         {{top-errors errors=errors}}
