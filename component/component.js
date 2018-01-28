@@ -12,8 +12,9 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
       let config = this.get('store').createRecord({
         type: '%%DRIVERNAME%%Config',
         apiToken: '',
-        serverType: "",
-        serverLocation: ""
+        serverType: 'cx21', // 4 GB Ram
+        serverLocation: 'fsn1', // Nuremberg
+        image: 'ubuntu-16.04'
       });
 
       let type = 'host';
@@ -30,9 +31,8 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
 
     // Add custom validation beyond what can be done from the config API schema
     validate() {
-      debugger;
       // Get generic API validation errors
-      // this._super();
+      this._super();
       var errors = this.get('errors') || [];
 
       // Add more specific errors
@@ -67,15 +67,22 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
       getData() {
         this.set('gettingData', true);
         let that = this;
-        Promise.all([this.apiRequest('/v1/locations').then(r => r.json()), this.apiRequest('/v1/images').then(r => r.json()), this.apiRequest('/v1/server_types').then(r => r.json())]).then(function (responses) {
+        Promise.all([this.apiRequest('/v1/locations'), this.apiRequest('/v1/images'), this.apiRequest('/v1/server_types')]).then(function (responses) {
           that.setProperties({
+            errors: [],
             needAPIToken: false,
             gettingData: false,
             regionChoices: responses[0].locations,
             imageChoices: responses[1].images,
             sizeChoices: responses[2].server_types
           });
-          console.log(responses)
+        }).catch(function (err) {
+          err.then(function (msg) {
+            that.setProperties({
+              errors: ['Error received from Hetzner Cloud: ' + msg.error.message],
+              gettingData: false
+            })
+          })
         })
       },
     },
@@ -85,7 +92,7 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
         headers: {
           'Authorization': 'Bearer ' + this.get('model.hetznerConfig.apiToken'),
         },
-      });
+      }).then(res => res.ok ? res.json() : Promise.reject(res.json()));
     }
     // Any computed properties or custom logic can go here
   });

@@ -1,5 +1,5 @@
 <section class="horizontal-form">
-    {{#if needAPIToken}}
+  {{#if needAPIToken}}
     <form>
       <div class="over-hr r-mb20">
         <span>Account Access</span>
@@ -8,7 +8,7 @@
           <div class="row">
             <label class="acc-label">Access Token*</label>
             {{input type="password" value=model.hetznerConfig.apiToken classNames="form-control" placeholder="Your Hetzner Cloud API access token"}}
-            <p class="text-info">A Personal Access Token from your Hetzner Cloud Project.</p>
+            <p class="text-info">Personal Access Token from one of your Hetzner Cloud Projects.</p>
           </div>
         </div>
         {{top-errors errors=errors}}
@@ -24,7 +24,6 @@
      {{else}}
     {{!-- This partial contains the quantity, name, and description fields --}}
     {{partial "host/add-common"}}
-    <div class="container-fluid">
       <div class="box mt-20">
         <h4>{{t 'machine.driverDigitalocean.regionSection'}}</h4>
 
@@ -32,7 +31,7 @@
           <label class="acc-label">{{t 'machine.driverDigitalocean.region.label'}}</label>
           <select class="form-control" onchange={{action (mut model.hetznerConfig.serverLocation) value="target.value"}}>
             {{#each regionChoices as |choice|}}
-              <option value={{choice.name}} selected={{eq hetznerConfig.serverLocation choice.slug}}>{{choice.city}}</option>
+              <option value={{choice.name}} selected={{eq model.hetznerConfig.serverLocation choice.name}}>{{choice.city}}</option>
             {{/each}}
           </select>
         </div>
@@ -45,7 +44,7 @@
             <label class="acc-label">{{t 'machine.driverDigitalocean.image.label'}}</label>
             <select class="form-control" onchange={{action (mut model.hetznerConfig.image) value="target.value"}}>
               {{#each imageChoices as |choice|}}
-                <option value={{choice.name}} disabled={{choice.disabled}} selected={{eq hetznerConfig.image choice.slug}}>{{choice.description}}</option>
+                <option value={{choice.name}} selected={{eq model.hetznerConfig.image choice.name}}>{{choice.description}}</option>
               {{/each}}
             </select>
           </div>
@@ -53,21 +52,20 @@
           <div class="col span-4">
             <label class="acc-label">{{t 'machine.driverDigitalocean.size.label'}}</label>
             <select class="form-control" onchange={{action (mut model.hetznerConfig.serverType) value="target.value"}}>
-              {{#each sizeChoices as |choice|}}
-                <option value={{choice.name}} selected={{eq hetznerConfig.serverType choice.slug}}>{{choice.description}} - {{choice.memory}}GB Memory - {{choice.disk}}GB Disk space</option>
-              {{/each}}
-            </select>
-          </div>
+            {{#each sizeChoices as |choice|}}
+              <option value={{choice.name}} selected={{eq model.hetznerConfig.serverType choice.name}}>{{choice.description}} - {{choice.memory}}GB Memory - {{choice.disk}}GB Disk space</option>
+            {{/each}}
+          </select>
         </div>
       </div>
     </div>
-    {{!-- This partial contains the Labels and Advanced Options fields --}}
-    {{partial "host/add-options"}}
+  {{!-- This partial contains the Labels and Advanced Options fields --}}
+  {{partial "host/add-options"}}
 
-    {{!-- This component shows errors produced by validate() in the component --}}
-    {{top-errors errors=errors}}
+  {{!-- This component shows errors produced by validate() in the component --}}
+  {{top-errors errors=errors}}
 
-    {{!-- This component shows the Create and Cancel buttons --}}
-    {{save-cancel save="save" cancel="cancel"}}
-    {{/if}}
+  {{!-- This component shows the Create and Cancel buttons --}}
+  {{save-cancel save="save" cancel="cancel"}}
+  {{/if}}
 </section>
