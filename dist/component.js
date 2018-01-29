@@ -229,7 +229,7 @@ exports["default"] = Ember.HTMLBars.template((function() {
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("label");
         dom.setAttribute(el4,"class","form-control-static");
-        var el5 = dom.createTextNode("Access Token*");
+        var el5 = dom.createTextNode("API Token*");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
         var el4 = dom.createTextNode("\n          ");
@@ -247,7 +247,14 @@ exports["default"] = Ember.HTMLBars.template((function() {
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("p");
         dom.setAttribute(el4,"class","help-block");
-        var el5 = dom.createTextNode("Personal Access Token from one of your Hetzner Cloud Projects.");
+        var el5 = dom.createTextNode("Create it by switching into the ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("a");
+        dom.setAttribute(el5,"href","https://console.hetzer.cloud");
+        var el6 = dom.createTextNode("Hetzner Cloud Console");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode(", choosing a project, go to Access → Tokens and create a new API token there.");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
         var el4 = dom.createTextNode("\n          ");
@@ -298,7 +305,7 @@ exports["default"] = Ember.HTMLBars.template((function() {
         return morphs;
       },
       statements: [
-        ["inline","input",[],["type","password","value",["subexpr","@mut",[["get","model.hetznerConfig.apiToken",["loc",[null,[12,42],[12,70]]],0,0,0,0]],[],[],0,0],"classNames","form-control","placeholder","Your Hetzner Cloud API access token"],["loc",[null,[12,12],[12,148]]],0,0],
+        ["inline","input",[],["type","password","value",["subexpr","@mut",[["get","model.hetznerConfig.apiToken",["loc",[null,[12,42],[12,70]]],0,0,0,0]],[],[],0,0],"classNames","form-control","placeholder","Your Hetzner Cloud API Token"],["loc",[null,[12,12],[12,141]]],0,0],
         ["inline","top-errors",[],["errors",["subexpr","@mut",[["get","errors",["loc",[null,[16,28],[16,34]]],0,0,0,0]],[],[],0,0]],["loc",[null,[16,8],[16,36]]],0,0],
         ["block","if",[["get","gettingData",["loc",[null,[18,16],[18,27]]],0,0,0,0]],[],0,1,["loc",[null,[18,10],[22,17]]]],
         ["element","action",["cancel"],[],["loc",[null,[23,18],[23,37]]],0,0],
