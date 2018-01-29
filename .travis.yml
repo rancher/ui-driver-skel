@@ -5,11 +5,12 @@ script:
   - yarn global add bower
   - bower install
   - yarn build
-deploy:
-  provider: pages
-  github-token: $GITHUB_TOKEN
-  skip-cleanup: true
-  local-dir: dist
+after_success:
+  - git add .
+  - git commit -m "Adding built Rancher UI source files"
+  - git remote rm origin
+  - git remote add origin https://maxibanki:$GITHUB_TOKEN@github.com/maxibanki/ui-driver-hetzner.git
+  - git push origin master
 branches:
     only:
     - master
