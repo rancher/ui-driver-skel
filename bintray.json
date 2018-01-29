@@ -1,0 +1,20 @@
+{
+    "package": {
+        "name": "master",
+        "repo": "ui-driver-hetzner",
+        "subject": "maxibanki"
+    },
+    "version": {
+        "name": "0.1"
+    },
+    "files": [
+        {
+            "includePattern": "dist/*",
+            "uploadPattern": "$1",
+            "matrixParams": {
+                "override": 1
+            }
+        }
+    ],
+    "publish": true
+}
