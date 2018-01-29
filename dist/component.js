@@ -250,7 +250,7 @@ exports["default"] = Ember.HTMLBars.template((function() {
         var el5 = dom.createTextNode("Create it by switching into the ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("a");
-        dom.setAttribute(el5,"href","https://console.hetzer.cloud");
+        dom.setAttribute(el5,"href","https://console.hetzner.cloud");
         var el6 = dom.createTextNode("Hetzner Cloud Console");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
