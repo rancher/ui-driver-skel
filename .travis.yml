@@ -6,9 +6,11 @@ script:
   - bower install
   - yarn build
 after_success:
+  - git config --global user.name "Max Schmitt"
+  - git config --global user.email max@schmitt.mx
   - git checkout master
   - git add .
-  - git commit -m "Adding built Rancher UI source files"
+  - git commit -m "Added built Rancher UI source files"
   - git remote rm origin
   - git remote add origin https://maxibanki:$GITHUB_TOKEN@github.com/maxibanki/ui-driver-hetzner.git
   - git push origin master
