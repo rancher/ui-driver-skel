@@ -6,6 +6,7 @@ script:
   - bower install
   - yarn build
 after_success:
+  - git checkout master
   - git add .
   - git commit -m "Adding built Rancher UI source files"
   - git remote rm origin
