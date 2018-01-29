@@ -5,9 +5,7 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
   exports['default'] = _ember['default'].Component.extend(_uiMixinsDriver['default'], {
     driverName: '%%DRIVERNAME%%',
     needAPIToken: true,
-    /* ^--- And here */
 
-    // Write your component here, starting with setting 'model' to a machine with your config populated
     bootstrap: function () {
       let config = this.get('store').createRecord({
         type: '%%DRIVERNAME%%Config',
@@ -29,28 +27,11 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
       }));
     },
 
-    // Add custom validation beyond what can be done from the config API schema
     validate() {
       // Get generic API validation errors
       this._super();
       var errors = this.get('errors') || [];
 
-      // Add more specific errors
-
-      // // Check something and add an error entry if it fails:
-      // if (parseInt(this.get('model.%%DRIVERNAME%%Config.size'), 10) < 1024) {
-      //   errors.push('Size must be at least 1024 MB');
-      // }
-
-      // // Set the array of errors for display,
-      // // and return true if saving should continue.
-      // if (errors.get('length')) {
-      //   this.set('errors', errors);
-      //   return false;
-      // } else {
-      //   this.set('errors', null);
-      //   return true;
-      // }
       let apiToken = this.get('model.hetznerConfig.apiToken') || '';
       if (apiToken && apiToken.length !== 64) {
         errors.push("That doesn't look like a valid access token");
@@ -94,6 +75,5 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
         },
       }).then(res => res.ok ? res.json() : Promise.reject(res.json()));
     }
-    // Any computed properties or custom logic can go here
   });
 });
