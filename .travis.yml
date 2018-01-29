@@ -5,12 +5,13 @@ script:
   - yarn global add bower
   - bower install
   - yarn build
+after_success:
+  - git checkout master
+  - git add .
+  - git commit -m "Adding built Rancher UI source files"
+  - git remote rm origin
+  - git remote add origin https://maxibanki:$GITHUB_TOKEN@github.com/maxibanki/ui-driver-hetzner.git
+  - git push origin master
 branches:
-  only:
+    only:
     - master
-deploy:
-  provider: bintray
-  user: maxibanki
-  file: "bintray.json"
-  key:
-    secure: HsnjRabWqKZzy2MQtVgvFmxwo4qDZ6IJibJgxulXQd1pgCHFhqg5fmxXR2GHcrr4IJ+sEyFBz3Tv9EEHDvMbjvxaeoYZObNRx68B/rh1a1xs+vceqvQkWoyF81h4X9+4Lssbslpluj9JwrCEeOPzgg1InBBTfAboIb3u/oJ5m1hj7Ct8er+sushe7JHMi8/VJxcF3lo24Y1jygIIe54MV7Ow6sNaYQVHdEdbvFRSoRnaJPSUYGdURAsQt9ryeKpawCavlR9yGlHu4Tz4ZksxiCyegRVmz52BT6jRKKREIeIRYFn3rQ+xk9C8o2P4GbZ7s2g74FGsKW3PJ2wEDE5XwX3k6XZgYVtE6S9EvXAnzFr81AF3qxOvhII9MXBguaQO7tz4XHbV8qxMmHew0+FEDLjHIqLXZxaDucVEY+dD9dGIuQ9289Ev2+ExScHGdAkOWYZGRpkeRoLprCTN5lK8y3B4yQ1b6lzat+kAIJ80jxv+gRuy+2TLR7LUGOUqxaYj+b/m1AkIBWicrIVFOA7b3FwgECuYOCOBHpixATck2fY7eFbPsWGun+jAI+u1Y18lk/oJ3NY52s1Jt+TTgzLcb9nfpRCy1xiqjUSllyeLiknyVfSI/EuI7rTRBl5diekHQLBRtoatwcLIL0UDsU1srhOB1b6PIFBLO3D4PDJ6ZSo=
