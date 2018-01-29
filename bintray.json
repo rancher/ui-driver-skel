@@ -5,11 +5,11 @@
         "subject": "maxibanki"
     },
     "version": {
-        "name": "0.1"
+        "name": "1.0"
     },
     "files": [
         {
-            "includePattern": "dist/*",
+            "includePattern": "dist/(.*)",
             "uploadPattern": "$1",
             "matrixParams": {
                 "override": 1
