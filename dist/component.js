@@ -1,6 +1,6 @@
 /* v----- Do not change anything between here
  *       (the DRIVERNAME placeholder will be automatically replaced during build) */
-define('ui/components/machine/driver-hetzner/component', ['exports', 'ember', 'ui/mixins/driver'], function (exports, _ember, _uiMixinsDriver) {
+define('ui/components/machine/driver-hetzner/component', ['exports', 'ember', 'ui/mixins/driver', 'ui/utils/constants'], function (exports, _ember, _uiMixinsDriver, _uiUtilsConstants) {
 
   exports['default'] = _ember['default'].Component.extend(_uiMixinsDriver['default'], {
     driverName: 'hetzner',
@@ -23,18 +23,19 @@ define('ui/components/machine/driver-hetzner/component', ['exports', 'ember', 'u
 
       this.set('model', this.get('store').createRecord({
         type: type,
+        // Without the overlay storage driver, only Ubuntu works. Debian, CentOS, Fedora won't.
+        engineStorageDriver: 'overlay',
         'hetznerConfig': config,
       }));
     },
 
     validate() {
-      // Get generic API validation errors
       this._super();
       var errors = this.get('errors') || [];
 
       let apiToken = this.get('model.hetznerConfig.apiToken') || '';
       if (apiToken && apiToken.length !== 64) {
-        errors.push("That doesn't look like a valid access token");
+        errors.push('That does not look like a valid access token');
       }
       if (errors.get('length')) {
         this.set('errors', errors);
@@ -66,10 +67,21 @@ define('ui/components/machine/driver-hetzner/component', ['exports', 'ember', 'u
           })
         })
       },
+      onImageChange(ev) {
+        this.set('model.hetznerConfig.image', ev.target.value);
+        // Use the most recent version if it's Fedora. The default (recommend, 1.12) and all other won't work with Fedora.
+        if (/fedora/i.test(ev.target.value)) {
+          console.log("ye")
+          this.set('model.engineInstallUrl', 'https://get.docker.com')
+        } else {
+          let defaultEngineInstallURL = this.get('settings.' + _uiUtilsConstants['default'].SETTING.ENGINE_URL);
+          this.set('model.engineInstallUrl', defaultEngineInstallURL)
+        }
+      }
     },
 
     apiRequest: function (path) {
-      return fetch("https://api.hetzner.cloud" + path, {
+      return fetch('https://api.hetzner.cloud' + path, {
         headers: {
           'Authorization': 'Bearer ' + this.get('model.hetznerConfig.apiToken'),
         },
@@ -693,7 +705,7 @@ exports["default"] = Ember.HTMLBars.template((function() {
         ["inline","partial",["host/add-common"],[],["loc",[null,[29,6],[29,35]]],0,0],
         ["attribute","onchange",["subexpr","action",[["subexpr","mut",[["get","model.hetznerConfig.serverLocation",["loc",[null,[38,66],[38,100]]],0,0,0,0]],[],["loc",[null,[38,61],[38,101]]],0,0]],["value","target.value"],["loc",[null,[null,null],[38,124]]],0,0],0,0,0,0],
         ["block","each",[["get","regionChoices",["loc",[null,[39,24],[39,37]]],0,0,0,0]],[],0,null,["loc",[null,[39,16],[41,25]]]],
-        ["attribute","onchange",["subexpr","action",[["subexpr","mut",[["get","model.hetznerConfig.image",["loc",[null,[53,64],[53,89]]],0,0,0,0]],[],["loc",[null,[53,59],[53,90]]],0,0]],["value","target.value"],["loc",[null,[null,null],[53,113]]],0,0],0,0,0,0],
+        ["attribute","onchange",["subexpr","action",["onImageChange"],[],["loc",[null,[null,null],[53,76]]],0,0],0,0,0,0],
         ["block","each",[["get","imageChoices",["loc",[null,[54,22],[54,34]]],0,0,0,0]],[],1,null,["loc",[null,[54,14],[56,23]]]],
         ["attribute","onchange",["subexpr","action",[["subexpr","mut",[["get","model.hetznerConfig.serverType",["loc",[null,[63,64],[63,94]]],0,0,0,0]],[],["loc",[null,[63,59],[63,95]]],0,0]],["value","target.value"],["loc",[null,[null,null],[63,118]]],0,0],0,0,0,0],
         ["block","each",[["get","sizeChoices",["loc",[null,[64,20],[64,31]]],0,0,0,0]],[],2,null,["loc",[null,[64,12],[66,21]]]],
