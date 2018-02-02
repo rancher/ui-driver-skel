@@ -16,7 +16,6 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
       });
 
       let type = 'host';
-
       if (!this.get('useHost')) {
         type = 'machine';
       }
@@ -31,17 +30,17 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
 
     validate() {
       this._super();
-      var errors = this.get('errors') || [];
+      let errors = this.get('errors') || [];
 
       let apiToken = this.get('model.hetznerConfig.apiToken') || '';
       if (apiToken && apiToken.length !== 64) {
         errors.push('That does not look like a valid access token');
       }
+
       if (errors.get('length')) {
         this.set('errors', errors);
         return false;
       }
-
       return true;
     },
 
@@ -71,7 +70,6 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
         this.set('model.hetznerConfig.image', ev.target.value);
         // Use the most recent version if it's Fedora. The default (recommend, 1.12) and all other won't work with Fedora.
         if (/fedora/i.test(ev.target.value)) {
-          console.log("ye")
           this.set('model.engineInstallUrl', 'https://get.docker.com')
         } else {
           let defaultEngineInstallURL = this.get('settings.' + _uiUtilsConstants['default'].SETTING.ENGINE_URL);
