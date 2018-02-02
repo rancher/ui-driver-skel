@@ -1,6 +1,6 @@
 # Rancher Hetzner Cloud UI Driver
 
-[![Build Status](https://travis-ci.org/maxibanki/ui-driver-hetzner.svg?branch=master)](https://travis-ci.org/maxibanki/ui-driver-hetzner)
+[![Build Status](https://travis-ci.org/mxschmitt/ui-driver-hetzner.svg?branch=master)](https://travis-ci.org/mxschmitt/ui-driver-hetzner)
 
 Rancher UI driver for the [Hetzner Cloud](hetzner.de/cloud)
 
