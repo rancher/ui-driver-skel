@@ -8,7 +8,7 @@ Rancher UI driver for the [Hetzner Cloud](hetzner.de/cloud)
 
 * Add a Machine Driver in Rancher (Admin tab -> Settings -> Machine Drivers)
   * Download URL: `https://github.com/JonasProgrammer/docker-machine-driver-hetzner/releases/download/0.2.7/docker-machine-driver-hetzner_0.2.7_linux_amd64.tar.gz`
-  * Custom UI URL: `https://mxschmitt.github.io/ui-driver-hetzner/dist/component.js`
+  * Custom UI URL: `https://mxschmitt.github.io/ui-driver-hetzner/dist/component.js`
 * Wait for the driver to become "Active"
 * Go to Infrastructure -> Hosts -> Add Host, your driver and custom UI should show up.
 
