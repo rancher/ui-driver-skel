@@ -1,6 +1,6 @@
 {
-  "name": "ui-driver-hwclouds",
-  "version": "0.0.1",
+  "name": "ui-driver-skel",
+  "version": "0.0.2",
   "description": "Skeleton Rancher UI driver for custom docker-machine drivers",
   "repository": {
     "type": "git",
