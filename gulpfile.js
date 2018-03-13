@@ -72,10 +72,10 @@ gulp.task('compiled', ['js'], function() {
   .pipe(replace(NAME_TOKEN, DRIVER_NAME))
   .pipe(htmlbars({compiler: emCompiler}))
   .pipe(wrapAmd({
-    deps: ['exports', 'ember', 'ui/mixins/driver'],
-    params: ['exports', '_ember', '_uiMixinsDriver'],
+    deps: ['exports'],
+    params: ['exports'],
     moduleRoot: 'component/',
-    modulePrefix: 'ui/components/machine/driver-' + DRIVER_NAME + '/'
+    modulePrefix: 'shared/components/node-driver/driver-' + DRIVER_NAME + '/'
   }))
   .pipe(replace(
     "return Ember.TEMPLATES['template']", 'exports["default"]'
