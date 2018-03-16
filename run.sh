@@ -5,15 +5,15 @@ case "$1" in
 "install")
     yarn install
     yarn build
-    git clone -b v1.6 https://github.com/mxschmitt/ui-driver-hetzner.git
-    cd ui-driver-hetzner
+    cd ..
+    git clone -b v1.6 https://github.com/mxschmitt/ui-driver-hetzner.git ui-driver-hetzner-v1
+    cd ui-driver-hetzner-v1
     yarn install
     yarn global add bower
     bower install
     yarn build
-    cd ..
-    mv ui-driver-hetzner/dist dist-v2
-    rm -rf ui-driver-hetzner
+    cd ../ui-driver-hetzner
+    cp -r ../ui-driver-hetzner-v1/dist dist-v2
 	;;
 "deploy")
     git config --global user.name "Max Schmitt"
