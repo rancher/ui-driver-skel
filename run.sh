@@ -8,6 +8,8 @@ case "$1" in
     git clone -b v1.6 https://github.com/mxschmitt/ui-driver-hetzner.git
     cd ui-driver-hetzner
     yarn install
+    yarn global add bower
+    bower install
     yarn build
     cd ..
     mv ui-driver-hetzner/dist dist-v2
