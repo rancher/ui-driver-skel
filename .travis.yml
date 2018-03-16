@@ -4,7 +4,7 @@ node_js:
 script:
   - bash run.sh install
 after_success:
-  - bash run-sh deploy
+  - bash run.sh deploy
 branches:
     only:
     - master
