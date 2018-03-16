@@ -2,9 +2,15 @@ language: node_js
 node_js:
   - node
 script:
-  - bash run.sh install
-after_success:
-  - bash run.sh deploy
-branches:
-    only:
-    - master
+  - yarn install
+  - yarn build
+deploy:
+  provider: gcs
+  access_key_id: $GCS_ACCESS_KEY_ID
+  secret_access_key: $GCS_SECRET_ACCESS_KEY
+  bucket: "hcloud-rancher-v2-ui-driver"
+  acl: public-read
+  skip_cleanup: true
+  local-dir: dist
+  on:
+    branch: master
