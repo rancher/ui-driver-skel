@@ -27,6 +27,6 @@ This package contains a small web-server that will serve up the custom driver UI
 
 For other users to see your driver, you need to build it and host the output on a server accessible from their browsers.
 
-* `npm build`
+* `npm run build`
 * Copy the contents of the `dist` directory onto a webserver.
   * If your Rancher is configured to use HA or SSL, the server must also be available via HTTPS.

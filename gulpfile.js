@@ -3,7 +3,7 @@ const gulp        = require('gulp');
 const clean       = require('gulp-clean');
 const gulpConcat  = require('gulp-concat');
 const gulpConnect = require('gulp-connect');
-const emCompiler  = require('./bower_components/ember/ember-template-compiler');
+const emCompiler  = require('ember-source/dist/ember-template-compiler');
 const htmlbars    = require('gulp-htmlbars-compiler');
 const wrapAmd     = require('gulp-wrap-amd');
 const replace     = require('gulp-replace');
@@ -72,10 +72,10 @@ gulp.task('compiled', ['js'], function() {
   .pipe(replace(NAME_TOKEN, DRIVER_NAME))
   .pipe(htmlbars({compiler: emCompiler}))
   .pipe(wrapAmd({
-    deps: ['exports', 'ember', 'ui/mixins/driver'],
-    params: ['exports', '_ember', '_uiMixinsDriver'],
+    deps: ['exports'],
+    params: ['exports'],
     moduleRoot: 'component/',
-    modulePrefix: 'ui/components/machine/driver-' + DRIVER_NAME + '/'
+    modulePrefix: 'shared/components/node-driver/driver-' + DRIVER_NAME + '/'
   }))
   .pipe(replace(
     "return Ember.TEMPLATES['template']", 'exports["default"]'
