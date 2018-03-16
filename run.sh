@@ -13,7 +13,8 @@ case "$1" in
     bower install
     yarn build
     cd ../ui-driver-hetzner
-    cp -r ../ui-driver-hetzner-v1/dist dist-v2
+    mv dist dist-v2
+    cp -r ../ui-driver-hetzner-v1/dist .
 	;;
 "deploy")
     git config --global user.name "Max Schmitt"
