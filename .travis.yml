@@ -13,7 +13,7 @@ after_success:
   - git commit -m "Added built Rancher UI source files"
   - git remote rm origin
   - git remote add origin https://maxibanki:$GITHUB_TOKEN@github.com/maxibanki/ui-driver-hetzner.git
-  - git push origin master
+  - git push origin $TRAVIS_BRANCH
 branches:
     only:
     - master
