@@ -24,7 +24,7 @@ define('shared/components/node-driver/driver-%%DRIVERNAME%%/component', ['export
 
     // Write your component here, starting with setting 'model' to a machine with your config populated
     bootstrap: function () {
-      let config = get(this, 'globalStore').createRecord({
+      let config = get(this, 'store').createRecord({
         type: '%%DRIVERNAME%%Config',
         serverType: 'cx21', // 4 GB Ram
         serverLocation: 'nbg1', // Nuremberg
@@ -33,6 +33,7 @@ define('shared/components/node-driver/driver-%%DRIVERNAME%%/component', ['export
       });
 
       set(this, 'model.%%DRIVERNAME%%Config', config);
+      set(this, 'model.engineStorageDriver', 'overlay');
     },
 
     // Add custom validation beyond what can be done from the config API schema
@@ -44,20 +45,12 @@ define('shared/components/node-driver/driver-%%DRIVERNAME%%/component', ['export
         errors.push('Name is required');
       }
 
-      // Add more specific errors
-
-      // Check something and add an error entry if it fails:
-      if (parseInt(get(this, 'config.memorySize'), 10) < 1024) {
-        errors.push('Memory Size must be at least 1024 MB');
-      }
-
       // Set the array of errors for display,
       // and return true if saving should continue.
       if (get(errors, 'length')) {
         set(this, 'errors', errors);
         return false;
-      }
-      else {
+      } else {
         set(this, 'errors', null);
         return true;
       }
@@ -72,7 +65,7 @@ define('shared/components/node-driver/driver-%%DRIVERNAME%%/component', ['export
             needAPIToken: false,
             gettingData: false,
             regionChoices: responses[0].locations,
-            imageChoices: responses[1].images,
+            imageChoices: responses[1].images.filter(image => !/fedora/.test(image.name)),
             sizeChoices: responses[2].server_types
           });
         }).catch(function (err) {
@@ -83,26 +76,15 @@ define('shared/components/node-driver/driver-%%DRIVERNAME%%/component', ['export
             })
           })
         })
-      },
-      onImageChange(ev) {
-        this.set('model.hetznerConfig.image', ev.target.value);
-        // Use the most recent version if it's Fedora. The default (recommend, 1.12) and all other won't work with Fedora.
-        // if (/fedora/i.test(ev.target.value)) {
-        //   this.set('model.engineInstallUrl', 'https://get.docker.com')
-        // } else {
-        //   let defaultEngineInstallURL = this.get('settings.' + _uiUtilsConstants['default'].SETTING.ENGINE_URL);
-        //   this.set('model.engineInstallUrl', defaultEngineInstallURL)
-        // }
       }
     },
 
     apiRequest: function (path) {
       return fetch('https://api.hetzner.cloud' + path, {
         headers: {
-          'Authorization': 'Bearer ' + this.get('model.hetznerConfig.apiToken'),
+          'Authorization': 'Bearer ' + this.get('model.%%DRIVERNAME%%Config.apiToken'),
         },
       }).then(res => res.ok ? res.json() : Promise.reject(res.json()));
     }
-    // Any computed properties or custom logic can go here
   });
 });
