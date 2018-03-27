@@ -1,80 +1,95 @@
 <section class="horizontal-form">
   {{#if needAPIToken}}
-    <form>
-      <div class="over-hr r-mb20">
-        <span>Account Access</span>
-      </div>
-        <div class="row form-group">
-          <div class="col-md-2">
-              <label class="form-control-static">API Token*</label>
-          </div>
-          <div class="col-md-10">
-            {{input type="password" value=model.hetznerConfig.apiToken classNames="form-control" placeholder="Your Hetzner Cloud API Token"}}
-            <p class="help-block">Create it by switching into the <a target="_blank" href="https://console.hetzner.cloud">Hetzner Cloud Console</a>, choosing a project, go to Access → Tokens and create a new API token there.</p>
-          </div>
-        </div>
-        {{top-errors errors=errors}}
-        <div class="footer-actions">
-          {{#if gettingData}}
-            <button class="btn bg-primary btn-disabled"><i class="icon icon-spinner icon-spin"></i> {{t 'generic.loading'}}</button>
-          {{else}}
-            <button {{action "getData" }} class="btn bg-primary" disabled={{not model.hetznerConfig.apiToken}}>Configure Server</button>
-          {{/if}}
-          <button {{action "cancel"}} class="btn bg-transparent">{{t 'generic.cancel'}}</button>
-        </div>
-      </form>
-     {{else}}
-     <div class="container-fluid">
-      {{!-- This partial contains the quantity, name, and description fields --}}
-      {{partial "host/add-common"}}
-        <div class="over-hr r-mt20 r-mb20">
-          <span>Region</span>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-2">
-              <label class="form-control-static">Region</label>
-            </div>
-            <div class="col-md-10">       
-              <select class="form-control" onchange={{action (mut model.hetznerConfig.serverLocation) value="target.value"}}>
-                {{#each regionChoices as |choice|}}
-                  <option value={{choice.name}} selected={{eq model.hetznerConfig.serverLocation choice.name}}>{{choice.city}}</option>
-                {{/each}}
-            </select>   
-          </div>
-        </div>
-        <div class="over-hr r-mt20 r-mb20">
-            <span>Settings</span>
-          </div>
-        <div class="row form-group">
-          <div class="col-md-2">
-            <label class="form-control-static">Image</label>
-          </div>
-          <div class="col-md-4">
-            <select class="form-control" onchange={{action "onImageChange"}}>
-              {{#each imageChoices as |choice|}}
-                <option value={{choice.name}} selected={{eq model.hetznerConfig.image choice.name}}>{{choice.description}}</option>
-              {{/each}}
-            </select>
-          </div>
-          <div class="col-md-2">
-            <label class="form-control-static">Size</label>
-          </div>
-          <div class="col-md-4">
-            <select class="form-control" onchange={{action (mut model.hetznerConfig.serverType) value="target.value"}}>
-            {{#each sizeChoices as |choice|}}
-              <option value={{choice.name}} selected={{eq model.hetznerConfig.serverType choice.name}}>{{choice.description}} - {{choice.memory}}GB Memory - {{choice.disk}}GB Disk space</option>
-            {{/each}}
-          </select>
-        </div>
+  <form>
+    <div class="over-hr r-mb20">
+      <span>Account Access</span>
     </div>
-    {{!-- This partial contains the Labels and Advanced Options fields --}}
-    {{partial "host/add-options"}}
-
-    {{!-- This component shows errors produced by validate() in the component --}}
+    <div class="row form-group">
+      <div class="col-md-2">
+        <label class="form-control-static">API Token*</label>
+      </div>
+      <div class="col-md-10">
+        {{input type="password" value=model.hetznerConfig.apiToken classNames="form-control" placeholder="Your Hetzner Cloud API Token"}}
+        <p class="help-block">Create it by switching into the
+          <a target="_blank" href="https://console.hetzner.cloud">Hetzner Cloud Console</a>, choosing a project, go to Access → Tokens and create a new API token there.</p>
+      </div>
+    </div>
     {{top-errors errors=errors}}
-
-    {{!-- This component shows the Create and Cancel buttons --}}
-    {{save-cancel save="save" cancel="cancel"}}
+    <div class="footer-actions">
+      {{#if gettingData}}
+      <button class="btn bg-primary btn-disabled">
+        <i class="icon icon-spinner icon-spin"></i> {{t 'generic.loading'}}</button>
+      {{else}}
+      <button {{action "getData" }} class="btn bg-primary" disabled={{not model.hetznerConfig.apiToken}}>Configure Server</button>
+      {{/if}}
+      <button {{action "cancel"}} class="btn bg-transparent">{{t 'generic.cancel'}}</button>
+    </div>
+  </form>
+  {{else}}
+  <div class="container-fluid">
+    {{!-- This partial contains the quantity, name, and description fields --}}
+    <div class="over-hr">
+      <span>{{templateOptionsTitle}}</span>
+    </div>
+    <div class="over-hr r-mt20 r-mb20">
+      <span>Region</span>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-2">
+        <label class="form-control-static">Region</label>
+      </div>
+      <div class="col-md-10">
+        <select class="form-control" onchange={{action (mut model.hetznerConfig.serverLocation) value="target.value" }}>
+          {{#each regionChoices as |choice|}}
+            <option value={{choice.name}} selected={{eq model.hetznerConfig.serverLocation choice.name}}>{{choice.city}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+    <div class="over-hr r-mt20 r-mb20">
+      <span>Settings</span>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-2">
+        <label class="form-control-static">Image</label>
+      </div>
+      <div class="col-md-4">
+        <select class="form-control" onchange={{action "onImageChange"}}>
+          {{#each imageChoices as |choice|}}
+            <option value={{choice.name}} selected={{eq model.hetznerConfig.image choice.name}}>{{choice.description}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label class="form-control-static">Size</label>
+      </div>
+      <div class="col-md-4">
+        <select class="form-control" onchange={{action (mut model.hetznerConfig.serverType) value="target.value" }}>
+          {{#each sizeChoices as |choice|}}
+            <option value={{choice.name}} selected={{eq model.hetznerConfig.serverType choice.name}}>{{choice.description}} - {{choice.memory}}GB Memory - {{choice.disk}}GB Disk space</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+    <div class="over-hr r-mt20 r-mb20">
+      <span>User data</span>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-2">
+        <label class="form-control-static">Cloud-init Configuration (optional)</label>
+      </div>
+      <div class="col-md-10">
+        <textarea onchange={{action (mut model.hetznerConfig.userData) value="target.value" }} rows="3" style="width: 100%; resize: vertical"></textarea>
+      </div>
+    </div>
+     {{!-- This following contains the Name, Labels and Engine Options fields --}}
+     {{form-name-description model=model nameRequired=true}}
+     {{form-user-labels initialLabels=labelResource.labels setLabels=(action 'setLabels') expandAll=expandAll expand=(action expandFn) }}
+     {{form-engine-opts machine=model showEngineUrl=showEngineUrl }}
+     {{!-- This component shows errors produced by validate() in the component --}}
+     {{top-errors errors=errors}}
+     {{!-- This component shows the Create and Cancel buttons --}}
+     {{save-cancel save="save" cancel="cancel"}}
   </div>
   {{/if}}
 </section>
