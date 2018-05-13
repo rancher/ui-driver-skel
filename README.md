@@ -8,7 +8,6 @@ Skeleton Rancher UI driver for custom docker-machine drivers
 * Update the "name" in package.json to match
   * You should also update description, URLs, etc, but these aren't strictly required.
 * `npm install`
-* `bower install`
 
 ## Development
 
