@@ -79,7 +79,7 @@
         <label class="form-control-static">Cloud-init Configuration (optional)</label>
       </div>
       <div class="col-md-10">
-        <textarea onchange={{action (mut model.hetznerConfig.userData) value="target.value" }} rows="3" style="width: 100%; resize: vertical"></textarea>
+        <textarea value={{model.hetznerConfig.userData}} onchange={{action (mut model.hetznerConfig.userData) value="target.value" }} rows="3" style="width: 100%; resize: vertical"></textarea>
       </div>
     </div>
      {{!-- This following contains the Name, Labels and Engine Options fields --}}
