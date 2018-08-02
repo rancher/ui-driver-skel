@@ -31,6 +31,6 @@
     "gulp-wrap-amd": "0.5.0",
     "jshint": "2.9.5",
     "yargs": "11.0.0",
-    "ember-source": "^3.0.0"
+    "ember-source": "3.1.0"
   }
 }
