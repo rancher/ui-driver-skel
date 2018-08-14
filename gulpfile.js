@@ -3,12 +3,11 @@ const gulp        = require('gulp');
 const clean       = require('gulp-clean');
 const gulpConcat  = require('gulp-concat');
 const gulpConnect = require('gulp-connect');
-const emCompiler  = require('ember-source/dist/ember-template-compiler');
-const htmlbars    = require('gulp-htmlbars-compiler');
-const wrapAmd     = require('gulp-wrap-amd');
 const replace     = require('gulp-replace');
+const babel       = require('gulp-babel');
 const argv        = require('yargs').argv;
 const pkg         = require('./package.json');
+const fs          = require('fs');
 
 const NAME_TOKEN  = '%%DRIVERNAME%%';
 
@@ -31,62 +30,98 @@ gulp.task('watch', function() {
   gulp.watch(['./component/*.js', './component/*.hbs', './component/*.css'], ['build']);
 });
 
-gulp.task('server', ['build', 'watch'], function() {
-  return gulpConnect.server({
-    root: [DIST],
-    port: process.env.PORT || 3000,
-    https: false
-  });
-});
-
 gulp.task('clean', function() {
-  return gulp.src([DIST, TMP], {read: false})
+  return gulp.src([`${DIST}*.js`, `${DIST}*.css`, `${DIST}*.hbs`, `${TMP}*.js`, `${TMP}*.css`, `${TMP}*.hbs`,], {read: false})
   .pipe(clean());
 });
 
-gulp.task('js', function() {
-  return gulp.src([
-    BASE + '*.js'
-  ])
-  .pipe(replace(NAME_TOKEN, DRIVER_NAME))
-  .pipe(gulpConcat('component.js',{newLine: ';\n'}))
-  .pipe(gulp.dest(TMP));
-});
-
-gulp.task('css', function() {
-  return gulp.src([
-    BASE + '**.css'
-  ])
-  .pipe(replace(NAME_TOKEN, DRIVER_NAME))
-  .pipe(gulpConcat('component.css',{newLine: ';\n'}))
-  .pipe(gulp.dest(DIST));
-});
-
-gulp.task('assets', function() {
+gulp.task('assets', ['styles'], function() {
   return gulp.src(ASSETS+'*')
   .pipe(gulp.dest(DIST));
 });
 
-gulp.task('compiled', ['js'], function() {
-  return gulp.src(BASE +'**/*.hbs')
-  .pipe(replace(NAME_TOKEN, DRIVER_NAME))
-  .pipe(htmlbars({compiler: emCompiler}))
-  .pipe(wrapAmd({
-    deps: ['exports'],
-    params: ['exports'],
-    moduleRoot: 'component/',
-    modulePrefix: 'shared/components/node-driver/driver-' + DRIVER_NAME + '/'
-  }))
-  .pipe(replace(
-    "return Ember.TEMPLATES['template']", 'exports["default"]'
-  ))
-  .pipe(gulpConcat('template.js'), {newLine: ';\n'})
-  .pipe(gulp.dest(TMP));
+gulp.task('build', ['compile']);
+
+gulp.task('babel', ['assets'], function() {
+
+  const opts = {
+    "presets": [
+      ["env", {
+        "targets": {
+          "browsers": ["> 1%"]
+        }
+      }]
+    ],
+    "plugins": [ "add-module-exports",
+                 [ "transform-es2015-modules-amd", {"noInterop": true,} ]
+               ],
+    "moduleId": `nodes/components/driver-${DRIVER_NAME}/component`,
+    "comments": false
+  };
+
+  let hbs = fs.readFileSync(`${BASE}template.hbs`);
+
+  hbs = Buffer.from(hbs).toString('base64');
+
+  return gulp.src([
+    `${BASE}component.js`
+  ])
+    .pipe(replace('const LAYOUT;', `const LAYOUT = "${ hbs }";`))
+    .pipe(babel(opts))
+    .pipe(gulpConcat(`component.js`,{newLine: ';\n'}))
+    .pipe(gulp.dest(TMP));
 });
 
-gulp.task('build', ['compiled','css','assets'], function() {
-  return gulp.src([`${TMP}/*.js`])
-  .pipe(gulpConcat('component.js',{newLine: ';\n'}))
-  .pipe(gulp.dest(DIST))
-  .pipe(gulpConnect.reload());
+gulp.task('rexport', ['babel'], function() {
+  const rexpOpts = {
+    "presets": [
+      ["env", {
+        "targets": {
+          "browsers": ["> 1%"]
+        }
+      }]
+    ],
+    "plugins": [ "add-module-exports",
+                 [ "transform-es2015-modules-amd", {"noInterop": true,} ]
+               ],
+    "moduleId": `ui/components/driver-${DRIVER_NAME}/component`
+  }
+
+  return gulp.src([
+    `${BASE}rexport.js`
+  ])
+    .pipe(replace(NAME_TOKEN, DRIVER_NAME))
+    .pipe(babel(rexpOpts))
+    .pipe(gulpConcat(`rexport.js`,{newLine: ';\n'}))
+    .pipe(gulp.dest(TMP));
+});
+
+gulp.task('compile', ['rexport'], function() {
+  return gulp.src([
+    `${TMP}**.js`
+  ])
+    .pipe(gulpConcat(`component.js`,{newLine: ';\n'}))
+    .pipe(gulp.dest(DIST));
+});
+
+
+gulp.task('styles', ['clean'], function() {
+  return gulp.src([
+    BASE + '**.css'
+  ])
+    .pipe(replace(NAME_TOKEN, DRIVER_NAME))
+    .pipe(gulpConcat(`component.css`,{newLine: ';\n'}))
+    .pipe(gulp.dest(DIST));
+});
+
+gulp.task('server', ['build', 'watch'], function() {
+  return gulpConnect.server({
+    root: [DIST],
+    port: process.env.PORT || 3000,
+    https: false,
+  });
+});
+
+gulp.task('watch', function() {
+  gulp.watch(['./component/*.js', './component/*.hbs', './component/*.css'], ['build']);
 });
