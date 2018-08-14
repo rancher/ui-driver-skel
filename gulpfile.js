@@ -59,12 +59,14 @@ gulp.task('babel', ['assets'], function() {
     "comments": false
   };
 
-  const hbs = fs.readFileSync(`${BASE}template.hbs`);
+  let hbs = fs.readFileSync(`${BASE}template.hbs`);
+
+  hbs = Buffer.from(hbs).toString('base64');
 
   return gulp.src([
     `${BASE}component.js`
   ])
-    .pipe(replace('const LAYOUT;', `const LAYOUT = "${ encodeURI(hbs) }";`))
+    .pipe(replace('const LAYOUT;', `const LAYOUT = "${ hbs }";`))
     .pipe(babel(opts))
     .pipe(gulpConcat(`component.js`,{newLine: ';\n'}))
     .pipe(gulp.dest(TMP));

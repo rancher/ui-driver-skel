@@ -20,8 +20,8 @@ export default Ember.Component.extend(NodeDriver, {
   init() {
     /*!!!!!!!!!!!DO NOT CHANGE START!!!!!!!!!!!*/
     // This does on the fly template compiling, if you mess with this :cry:
-    const decodedLayout = decodeURI(LAYOUT);
-    const template = Ember.HTMLBars.compile(decodedLayout, {
+    const decodedLayout = window.atob(LAYOUT);
+    const template      = Ember.HTMLBars.compile(decodedLayout, {
       moduleName: 'nodes/components/driver-interoutevdc/template'
     });
     set(this,'layout', template);
