@@ -1,5 +1,4 @@
 /*!!!!!!!!!!!Do not change anything between here (the DRIVERNAME placeholder will be automatically replaced at buildtime)!!!!!!!!!!!*/
-
 import NodeDriver from 'shared/mixins/node-driver';
 
 const LAYOUT;
@@ -10,11 +9,19 @@ const alias        = Ember.computed.alias;
 const service      = Ember.inject.service;
 const defaultRadix = 10;
 const defaultBase  = 1024;
+/*!!!!!!!!!!!DO NOT CHANGE END!!!!!!!!!!!*/
 
+
+/*!!!!!!!!!!!GLOBAL CONST START!!!!!!!!!!!*/
+/*!!!!!!!!!!!GLOBAL CONST END!!!!!!!!!!!*/
+
+
+
+/*!!!!!!!!!!!DO NOT CHANGE START!!!!!!!!!!!*/
 export default Ember.Component.extend(NodeDriver, {
-  /*!!!!!!!!!!!DO NOT CHANGE END!!!!!!!!!!!*/
   driverName: '%%DRIVERNAME%%',
   config:     alias('model.%%DRIVERNAME%%Config'),
+  /*!!!!!!!!!!!DO NOT CHANGE END!!!!!!!!!!!*/
   app:        service(),
 
   init() {
@@ -22,7 +29,7 @@ export default Ember.Component.extend(NodeDriver, {
     // This does on the fly template compiling, if you mess with this :cry:
     const decodedLayout = window.atob(LAYOUT);
     const template      = Ember.HTMLBars.compile(decodedLayout, {
-      moduleName: 'nodes/components/driver-interoutevdc/template'
+      moduleName: 'nodes/components/driver-%%DRIVERNAME%%/template'
     });
     set(this,'layout', template);
 
