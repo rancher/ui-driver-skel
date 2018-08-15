@@ -64,7 +64,7 @@ export default Ember.Component.extend(NodeDriver, {
     // Add more specific errors
 
     // Check something and add an error entry if it fails:
-    if ( parseInt(get(this, 'config.memorySize'),10) < 1024 ) {
+    if ( parseInt(get(this, 'config.memorySize'), defaultRadix) < defaultBase ) {
       errors.push('Memory Size must be at least 1024 MB');
     }
 
