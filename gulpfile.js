@@ -1,21 +1,23 @@
 /* jshint node: true */
-const gulp        = require('gulp');
-const clean       = require('gulp-clean');
-const gulpConcat  = require('gulp-concat');
-const gulpConnect = require('gulp-connect');
-const replace     = require('gulp-replace');
-const babel       = require('gulp-babel');
-const argv        = require('yargs').argv;
-const pkg         = require('./package.json');
-const fs          = require('fs');
+const gulp          = require('gulp');
+const clean         = require('gulp-clean');
+const gulpConcat    = require('gulp-concat');
+const gulpConnect   = require('gulp-connect');
+const replace       = require('gulp-replace');
+const babel         = require('gulp-babel');
+const argv          = require('yargs').argv;
+const pkg           = require('./package.json');
+const fs            = require('fs');
+const replaceString = require('replace-string');
 
-const NAME_TOKEN  = '%%DRIVERNAME%%';
 
-const BASE        = 'component/';
-const DIST        = 'dist/';
-const TMP         = 'tmp/';
-const ASSETS      = 'assets/';
-const DRIVER_NAME = argv.name || pkg.name.replace(/^ui-driver-/,'');
+const NAME_TOKEN    = '%%DRIVERNAME%%';
+
+const BASE          = 'component/';
+const DIST          = 'dist/';
+const TMP           = 'tmp/';
+const ASSETS        = 'assets/';
+const DRIVER_NAME   = argv.name || pkg.name.replace(/^ui-driver-/,'');
 
 console.log('Driver Name:', DRIVER_NAME);
 
@@ -59,7 +61,9 @@ gulp.task('babel', ['assets'], function() {
     "comments": false
   };
 
-  let hbs = fs.readFileSync(`${BASE}template.hbs`);
+  let hbs = fs.readFileSync(`${BASE}template.hbs`, 'utf8');
+
+  hbs = replaceString(hbs, NAME_TOKEN, DRIVER_NAME);
 
   hbs = Buffer.from(hbs).toString('base64');
 

@@ -1,6 +1,8 @@
 # ui-driver-skel
 Skeleton Rancher UI driver for custom docker-machine drivers
 
+**Note: The Master branch works with Rancher 2.x+, if you are building a custom driver for Rancher 1.x use the 1.x branch**
+
 ## Setup
 
 * Fork this repository into your own account as `ui-driver-DRIVERNAME`
@@ -16,6 +18,7 @@ This package contains a small web-server that will serve up the custom driver UI
 * The driver name can be optionally overridden: `npm start -- --name=DRIVERNAME`
 * The compiled files are viewable at http://localhost:3000.
 * **Note:** The development server does not currently automatically restart when files are changed.
+* Do not use the `model.<drivername>Confg` signature to access your driver config in the template file, use the `config` alias that is already setup in the component
 
 ## Building
 
