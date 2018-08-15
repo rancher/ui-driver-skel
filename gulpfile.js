@@ -61,9 +61,9 @@ gulp.task('babel', ['assets'], function() {
     "comments": false
   };
 
-  let hbs = fs.readFileSync(`${BASE}template.hbs`);
+  let hbs = fs.readFileSync(`${BASE}template.hbs`, 'utf8');
 
-  replaceString(hbs, NAME_TOKEN, DRIVER_NAME);
+  hbs = replaceString(hbs, NAME_TOKEN, DRIVER_NAME);
 
   hbs = Buffer.from(hbs).toString('base64');
 
