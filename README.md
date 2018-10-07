@@ -16,6 +16,18 @@ Rancher 2 UI driver for the [Hetzner Cloud](hetzner.de/cloud). For the Rancher 1
 ![Authentication screen](docs/authentication-screen.png)
 ![Configuration screen](docs/configuration-screen.png)
 
+## Compatibility
+
+The following `component.js` is always compatible with the latest Rancher 2.X version:
+
+`https://storage.googleapis.com/hcloud-rancher-v2-ui-driver/component.js`
+
+### Rancher 2.0
+
+Use this `component.js` to support Rancher 2.0 version:
+
+`https://storage.googleapis.com/hcloud-rancher-v2-ui-driver/component-v20.js`
+
 ## Development
 
 This package contains a small web-server that will serve up the custom driver UI at `http://localhost:3000/component.js`.  You can run this while developing and point the Rancher settings there.
