@@ -71,6 +71,7 @@ gulp.task('babel', ['assets'], function() {
     `${BASE}component.js`
   ])
     .pipe(replace('const LAYOUT;', `const LAYOUT = "${ hbs }";`))
+    .pipe(replace(NAME_TOKEN, DRIVER_NAME)) 
     .pipe(babel(opts))
     .pipe(gulpConcat(`component.js`,{newLine: ';\n'}))
     .pipe(gulp.dest(TMP));
