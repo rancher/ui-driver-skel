@@ -17,3 +17,5 @@ testem.log
 .tern-port
 
 /dist
+# we use the package manager yarn
+package-json.lock
