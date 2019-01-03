@@ -26,10 +26,8 @@ if (!DRIVER_NAME) {
   process.exit(1);
 }
 
-gulp.task('default', ['build']);
-
 gulp.task('watch', function () {
-  gulp.watch(['./component/*.js', './component/*.hbs', './component/*.css'], ['build']);
+  gulp.watch(['./component/*.js', './component/*.hbs', './component/*.css'], gulp.parallel('build'));
 });
 
 gulp.task('clean', function () {
@@ -37,34 +35,41 @@ gulp.task('clean', function () {
     .pipe(clean());
 });
 
-gulp.task('assets', ['styles'], function () {
+gulp.task('styles', gulp.series('clean', function () {
+  return gulp.src([
+    BASE + '**.css'
+  ])
+    .pipe(replace(NAME_TOKEN, DRIVER_NAME))
+    .pipe(gulpConcat(`component.css`, { newLine: ';\n' }))
+    .pipe(gulp.dest(DIST));
+}))
+
+gulp.task('assets', gulp.series('styles', function () {
   return gulp.src(ASSETS + '*')
     .pipe(gulp.dest(DIST));
-});
+}));
 
-gulp.task('build', ['compile']);
-
-gulp.task('babel', ['assets'], function () {
-
-  const opts = {
-    "presets": [
+gulp.task('babel', gulp.series('assets', function () {
+  const babelOpts = {
+    presets: [
       [
-        "@babel/preset-env",
-        {
-          "useBuiltIns": "entry"
-        }
-      ]
+        "@babel/preset-env", {
+          targets: {
+            browsers: ["> 1%"]
+          }
+        }]
     ],
-    "plugins": [
+    plugins: [
       "add-module-exports",
       [
         "transform-es2015-modules-amd", {
           "noInterop": true,
-        }]
+        }
+      ]
     ],
-    "moduleId": `nodes/components/driver-${DRIVER_NAME}/component`,
-    "comments": false
-  };
+    comments: false,
+    moduleId: `nodes/components/driver-${DRIVER_NAME}/component`
+  }
 
   let hbs = fs.readFileSync(`${BASE}template.hbs`, 'utf8');
 
@@ -77,61 +82,61 @@ gulp.task('babel', ['assets'], function () {
   ])
     .pipe(replace('const LAYOUT;', `const LAYOUT = "${hbs}";`))
     .pipe(replace(NAME_TOKEN, DRIVER_NAME))
-    .pipe(babel(opts))
+    .pipe(babel(babelOpts))
     .pipe(gulpConcat(`component.js`, { newLine: ';\n' }))
     .pipe(gulp.dest(TMP));
-});
+}));
 
-gulp.task('rexport', ['babel'], function () {
-  const rexpOpts = {
-    "presets": [
-      ["env", {
-        "targets": {
-          "browsers": ["> 1%"]
+gulp.task('rexport', gulp.series('babel', function () {
+  const babelOpts = {
+    presets: [
+      [
+        "@babel/preset-env", {
+          targets: {
+            browsers: ["> 1%"]
+          }
+        }]
+    ],
+    plugins: [
+      "add-module-exports",
+      [
+        "transform-es2015-modules-amd", {
+          "noInterop": true,
         }
-      }]
+      ]
     ],
-    "plugins": ["add-module-exports",
-      ["transform-es2015-modules-amd", { "noInterop": true, }]
-    ],
-    "moduleId": `ui/components/driver-${DRIVER_NAME}/component`
+    comments: false,
+    moduleId: `ui/components/driver-${DRIVER_NAME}/component`
   }
-
   return gulp.src([
     `${BASE}rexport.js`
   ])
     .pipe(replace(NAME_TOKEN, DRIVER_NAME))
-    .pipe(babel(rexpOpts))
+    .pipe(babel(babelOpts))
     .pipe(gulpConcat(`rexport.js`, { newLine: ';\n' }))
     .pipe(gulp.dest(TMP));
-});
+}));
 
-gulp.task('compile', ['rexport'], function () {
+gulp.task('compile', gulp.series('rexport', function () {
   return gulp.src([
     `${TMP}**.js`
   ])
     .pipe(gulpConcat(`component.js`, { newLine: ';\n' }))
     .pipe(gulp.dest(DIST));
-});
+}));
 
+gulp.task('build', gulp.series('compile'));
 
-gulp.task('styles', ['clean'], function () {
-  return gulp.src([
-    BASE + '**.css'
-  ])
-    .pipe(replace(NAME_TOKEN, DRIVER_NAME))
-    .pipe(gulpConcat(`component.css`, { newLine: ';\n' }))
-    .pipe(gulp.dest(DIST));
-});
-
-gulp.task('server', ['build', 'watch'], function () {
+gulp.task('server', gulp.parallel(['build', 'watch'], function () {
   return gulpConnect.server({
     root: [DIST],
     port: process.env.PORT || 3000,
     https: false,
   });
-});
+}));
+
+gulp.task('default', gulp.series('build'));
 
 gulp.task('watch', function () {
-  gulp.watch(['./component/*.js', './component/*.hbs', './component/*.css'], ['build']);
+  gulp.watch(['./component/*.js', './component/*.hbs', './component/*.css'], gulp.parallel('build'));
 });
