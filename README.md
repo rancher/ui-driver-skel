@@ -30,6 +30,8 @@ Use this `component.js` to support Rancher 2.0 version:
 
 ## Tested linux distributions
 
+To use `Debian` e.g. with a non default Storage Driver, you have to set it manually in the Engine Options of the Node Template in Rancher.
+
 ### Recommend
 
 | Image        | Docker Version                     | Docker Storage Driver |
