@@ -28,9 +28,33 @@ Use this `component.js` to support Rancher 2.0 version:
 
 `https://storage.googleapis.com/hcloud-rancher-v2-ui-driver/component-v20.js`
 
+## Tested linux distributions
+
+### Recommend
+
+| Image        | Docker Version                     | Docker Storage Driver |
+|--------------|------------------------------------|-----------------------|
+| Ubuntu 16.04 | 17.03                              | aufs (default)        |
+| Debian 9     | 17.03                              | overlay2, overlay     |
+| CentOS 7     | 17.03                              | overlay (default)     |
+| Ubuntu 18.04 | not supported (due docker-install) |                       |
+| Fedora 27    | not supported (due docker-install) |                       |
+| Fedora 28    | not supported (due docker-install) |                       |
+
+### Beta
+
+| Image        | Docker Version                     | Docker Storage Driver  |
+|--------------|------------------------------------|------------------------|
+| Ubuntu 18.04 | 18.06                              | overlay2 (default)     |
+| Ubuntu 16.04 | 18.06                              | aufs (default)         |
+| Debian 9     | 18.06                              | overlay2, overlay      |
+| CentOS 7     | 18.06                              | devicemapper (default) |
+| Fedora 27    | not supported (due docker-install) |                        |
+| Fedora 28    | not supported (due docker-install) |                        |
+
 ## Development
 
-This package contains a small web-server that will serve up the custom driver UI at `http://localhost:3000/component.js`.  You can run this while developing and point the Rancher settings there.
+This package contains a small web-server that will serve up the custom driver UI at `http://localhost:3000/component.js`. You can run this while developing and point the Rancher settings there.
 * `npm start`
 * The driver name can be optionally overridden: `npm start -- --name=DRIVERNAME`
 * The compiled files are viewable at http://localhost:3000.

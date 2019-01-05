@@ -14,8 +14,7 @@
   "scripts": {
     "start": "./node_modules/.bin/gulp server",
     "clean": "./node_modules/.bin/gulp clean",
-    "build": "./node_modules/.bin/gulp build",
-    "upload": "./scripts/upload"
+    "build": "./node_modules/.bin/gulp build"
   },
   "homepage": "https://github.com/mxschmitt/ui-driver-hetzner#readme",
   "devDependencies": {

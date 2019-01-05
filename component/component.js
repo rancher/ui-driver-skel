@@ -55,7 +55,6 @@ export default Ember.Component.extend(NodeDriver, {
     });
 
     set(this, 'model.%%DRIVERNAME%%Config', config);
-    set(this, 'model.engineStorageDriver', 'overlay');
   },
 
   // Add custom validation beyond what can be done from the config API schema
@@ -100,8 +99,7 @@ export default Ember.Component.extend(NodeDriver, {
             .map(image => ({
               ...image,
               id: image.id.toString()
-            }))
-            .filter(image => !/fedora/.test(image.name)),
+            })),
           sizeChoices: responses[2].server_types
         });
       }).catch(function (err) {
