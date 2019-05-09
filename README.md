@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/mxschmitt/ui-driver-hetzner.svg?branch=master)](https://travis-ci.org/mxschmitt/ui-driver-hetzner)
 
-Rancher 2 UI driver for the [Hetzner Cloud](https://www.hetzner.de/cloud). For the Rancher 1 version check out the readme from the `v1.6` branch which you can find [here](https://github.com/mxschmitt/ui-driver-hetzner/blob/v1.6/README.md).
+Rancher 2.X UI driver for the [Hetzner Cloud](https://www.hetzner.de/cloud). For the Rancher 1 version check out the readme from the `v1.6` branch which you can find [here](https://github.com/mxschmitt/ui-driver-hetzner/blob/v1.6/README.md).
 
 ## Usage
 
@@ -37,17 +37,6 @@ Use this `component.js` to support Rancher 2.0 version:
 To use `Debian` e.g. with a non default Storage Driver, you have to set it manually in the Engine Options of the Node Template in Rancher.
 
 ### Recommend
-
-| Image        | Docker Version                     | Docker Storage Driver |
-|--------------|------------------------------------|-----------------------|
-| Ubuntu 16.04 | 17.03                              | aufs (default)        |
-| Debian 9     | 17.03                              | overlay2, overlay     |
-| CentOS 7     | 17.03                              | overlay (default)     |
-| Ubuntu 18.04 | not supported (due docker-install) |                       |
-| Fedora 27    | not supported (due docker-install) |                       |
-| Fedora 28    | not supported (due docker-install) |                       |
-
-### Beta
 
 | Image        | Docker Version                     | Docker Storage Driver  |
 |--------------|------------------------------------|------------------------|
