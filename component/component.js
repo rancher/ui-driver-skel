@@ -17,8 +17,6 @@ const set = Ember.set;
 const alias = Ember.computed.alias;
 const service = Ember.inject.service;
 
-const defaultRadix = 10;
-const defaultBase = 1024;
 /*!!!!!!!!!!!GLOBAL CONST END!!!!!!!!!!!*/
 
 
@@ -51,7 +49,8 @@ export default Ember.Component.extend(NodeDriver, {
       serverType: 'cx21', // 4 GB Ram
       serverLocation: 'nbg1', // Nuremberg
       imageId: 1,
-      userData: ''
+      userData: '',
+      networks: []
     });
 
     set(this, 'model.%%DRIVERNAME%%Config', config);
@@ -66,15 +65,6 @@ export default Ember.Component.extend(NodeDriver, {
       errors.push('Name is required');
     }
 
-    // Add more specific errors
-
-    // Check something and add an error entry if it fails:
-    if (parseInt(get(this, 'config.memorySize'), defaultRadix) < defaultBase) {
-      errors.push('Memory Size must be at least 1024 MB');
-    }
-    if (get(this, 'model.%%DRIVERNAME%%Config.image')) {
-      this.set('model.%%DRIVERNAME%%Config.image', "")
-    }
     // Set the array of errors for display,
     // and return true if saving should continue.
     if (get(errors, 'length')) {
@@ -89,7 +79,7 @@ export default Ember.Component.extend(NodeDriver, {
     getData() {
       this.set('gettingData', true);
       let that = this;
-      Promise.all([this.apiRequest('/v1/locations'), this.apiRequest('/v1/images'), this.apiRequest('/v1/server_types')]).then(function (responses) {
+      Promise.all([this.apiRequest('/v1/locations'), this.apiRequest('/v1/images'), this.apiRequest('/v1/server_types'), this.apiRequest('/v1/networks')]).then(function (responses) {
         that.setProperties({
           errors: [],
           needAPIToken: false,
@@ -100,7 +90,11 @@ export default Ember.Component.extend(NodeDriver, {
               ...image,
               id: image.id.toString()
             })),
-          sizeChoices: responses[2].server_types
+          sizeChoices: responses[2].server_types,
+          networkChoices: responses[3].networks.map(network => ({
+            ...network,
+            id: network.id.toString()
+          }))
         });
       }).catch(function (err) {
         err.then(function (msg) {
@@ -110,7 +104,11 @@ export default Ember.Component.extend(NodeDriver, {
           })
         })
       })
-    }
+    },
+    modifyNetworks: function (select) {
+      let options = [...select.target.options].filter(o => o.selected).map(o => o.value)
+      this.set('model.%%DRIVERNAME%%Config.networks', options);
+    },
   },
   apiRequest(path) {
     return fetch('https://api.hetzner.cloud' + path, {
