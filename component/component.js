@@ -66,8 +66,6 @@ export default Ember.Component.extend(NodeDriver, {
       this.set('model.%%DRIVERNAME%%Config.networks', [])
     }
 
-    if(this.has)
-
     var errors = get(this, 'errors') || [];
     if (!get(this, 'model.name')) {
       errors.push('Name is required');
