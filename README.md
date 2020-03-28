@@ -69,7 +69,7 @@ For other users to see your driver, you need to build it and host the output on 
 
 Try to use `overlay2` and if it does not work `overlay` as `Storage Driver` in the `Engine Options` in the bottom.
 
-## How secure is the `Private Network` feature?
+### How secure is the `Private Network` feature?
 
 > Traffic between Cloud Servers inside a Network is private and isolated, but not automatically encrypted. We recommend you use TLS or similar protocols to encrypt sensitive traffic.
 
@@ -79,11 +79,11 @@ The Rancher traffic between the agents and the Rancher related traffic to the no
 
 The custom application specific traffic is *not* encrypted. You can use e.g. the Weave CNI-Provider for that: https://rancher.com/docs/rancher/v2.x/en/faq/networking/cni-providers/#weave
 
-## Requirements for Private Networks
+### Requirements for Private Networks
 
 - Rancher host needs to be in the *same Private Network* as the selected one in the Node template
 - Under the global settings of Rancher the `server-url` needs to be the internal IP of the Private Network (you can find it in the Hetzner Cloud Console). Otherwise the traffic won't go through the Internal network.
 
-## How to close the open ports on the public interface?
+### How to close the open ports on the public interface?
 
 You could use it e.g. in combination with that tool: https://github.com/vitobotta/hetzner-cloud-init
