@@ -11,7 +11,7 @@
       <div class="col-md-10">
         {{input type="password" value=model.hetznerConfig.apiToken classNames="form-control" placeholder="Your Hetzner Cloud API Token"}}
         <p class="help-block">Create it by switching into the
-          <a target="_blank" href="https://console.hetzner.cloud">Hetzner Cloud Console</a>, choosing a project, go to Access &rarr; Tokens and create a new API token there.</p>
+          <a target="_blank" rel="noopener noreferrer" href="https://console.hetzner.cloud">Hetzner Cloud Console</a>, choosing a project, go to Access &rarr; Tokens and create a new API token there.</p>
       </div>
     </div>
     {{top-errors errors=errors}}
@@ -71,14 +71,14 @@
     <div class="row form-group">
       <div class="col-md-2">
         <label class="form-control-static">
-          <a href="https://cloudinit.readthedocs.io/en/latest/topics/examples.html" target="_blank">Cloud-init Configuration</a> (optional)
+          <a href="https://cloudinit.readthedocs.io/en/latest/topics/examples.html" target="_blank" rel="noopener noreferrer">Cloud-init Configuration</a> (optional)
         </label>
       </div>
       <div class="col-md-10">
         <textarea value={{model.hetznerConfig.userData}} onchange={{action (mut model.hetznerConfig.userData) value="target.value" }} rows="3" style="width: 100%; resize: vertical"></textarea>
       </div>
       <div class="col-md-2">
-        <label class="form-control-static">Networks (Beta, optional. You have to create these Networks in the <a href="https://console.hetzner.cloud" target="_blank">Hetzner Cloud Console</a>)</label>
+        <label class="form-control-static">Networks (Beta, optional. You have to create these Networks in the <a href="https://console.hetzner.cloud" target="_blank" rel="noopener noreferrer">Hetzner Cloud Console</a>)</label>
       </div>
       <div class="col-md-4">
         <select class="form-control" onchange={{action 'modifyNetworks' }} multiple="true">
@@ -86,6 +86,13 @@
           <option value={{network.id}} selected={{array-includes model.hetznerConfig.networks network.id}}>{{network.name}} ({{network.ip_range}})</option>
           {{/each}}
         </select>
+      </div>
+      <div class="col-md-2">
+        <div class="checkbox">
+          <label class="acc-label">{{input type="checkbox" checked=model.hetznerConfig.usePrivateNetwork}}
+            Use private network (first private network which is attached will be used for communication)
+          </label>
+        </div>
       </div>
     </div>
      {{!-- This following contains the Name, Labels and Engine Options fields --}}
@@ -95,7 +102,7 @@
      {{!-- This component shows errors produced by validate() in the component --}}
      {{top-errors errors=errors}}
      {{!-- This component shows the Create and Cancel buttons --}}
-     {{save-cancel save="save" cancel="cancel"}}
+     {{save-cancel save="save" cancel=(action "cancel")}}
   </div>
   {{/if}}
 </section>

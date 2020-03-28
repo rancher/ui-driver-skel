@@ -48,9 +48,10 @@ export default Ember.Component.extend(NodeDriver, {
       type: '%%DRIVERNAME%%Config',
       serverType: 'cx21', // 4 GB Ram
       serverLocation: 'nbg1', // Nuremberg
-      imageId: 1,
+      imageId: "168855", // ubuntu-18.04
       userData: '',
-      networks: []
+      networks: [],
+      usePrivateNetwork: false
     });
 
     set(this, 'model.%%DRIVERNAME%%Config', config);
@@ -64,6 +65,8 @@ export default Ember.Component.extend(NodeDriver, {
     if (!this.get('model.%%DRIVERNAME%%Config.networks')) {
       this.set('model.%%DRIVERNAME%%Config.networks', [])
     }
+
+    if(this.has)
 
     var errors = get(this, 'errors') || [];
     if (!get(this, 'model.name')) {
