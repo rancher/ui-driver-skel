@@ -43,10 +43,16 @@ export default Ember.Component.extend(NodeDriver, {
   // Write your component here, starting with setting 'model' to a machine with your config populated
   bootstrap: function() {
     // bootstrap is called by rancher ui on 'init', you're better off doing your setup here rather then the init function to ensure everything is setup correctly
-    let config = get(this, 'globalStore').createRecord({
+    let config = this.get('store').createRecord({
       type: '%%DRIVERNAME%%Config',
-      cpuCount: 2,
-      memorySize: 2048,
+      username: "admin",
+      vmCpus: 1,
+      vmCores: 1,
+      vmMem: 1024,
+      vmImage: "docker-img",
+      vmNetwork: "default",
+
+
     });
 
     set(this, 'model.%%DRIVERNAME%%Config', config);
@@ -64,7 +70,7 @@ export default Ember.Component.extend(NodeDriver, {
     // Add more specific errors
 
     // Check something and add an error entry if it fails:
-    if ( parseInt(get(this, 'config.memorySize'), defaultRadix) < defaultBase ) {
+    if ( parseInt(get(this, 'config.vmMem'), defaultRadix) < defaultBase ) {
       errors.push('Memory Size must be at least 1024 MB');
     }
 

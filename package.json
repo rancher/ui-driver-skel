@@ -1,5 +1,5 @@
 {
-  "name": "ui-driver-skel",
+  "name": "ui-driver-nutanix",
   "version": "0.0.2",
   "description": "Skeleton Rancher UI driver for custom docker-machine drivers",
   "repository": {
