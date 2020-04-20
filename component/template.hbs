@@ -1,59 +1,161 @@
 <section class="horizontal-form">
-  {{#accordion-list showExpandAll=false as | al expandFn |}}
-    {{!-- This line shows the driver title which you don't have to change it --}}
-    <div class="over-hr mb-20"><span>{{driverOptionsTitle}}</span></div>
+  <div class="container-fluid">
+    {{!-- This partial contains the quantity, name, and description fields --}}
 
-    {{!-- An example input option --}}
-    <div class="row box mt-20">
-      <h4>Instance Options</h4>
-      <div class="row">
-        <div class="col span-2 col-inline">
-          <label>CPUs</label>
-        </div>
+    <div class="over-hr r-mt20 r-mb20">
+      <span>Nutanix options</span>
+    </div>
 
-        <div class="col span-1">
-          {{config.cpuCount}}
-        </div>
-        <div class="col span-3">
-          {{input-slider value=config.cpuCount valueMin=1 valueMax=32}}
-        </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-2 form-label">
+        <label class="form-control-static">Management Endpoint</label>
+      </div>
+      <div class="col-sm-12 col-md-4">
 
-        <div class="col span-2 col-inline">
-          <label>Memory Size</label>
-        </div>
-        <div class="col span-4">
-          <div class="input-group">
-            {{input-integer min=1 value=config.memorySize classNames="form-control"}}
-            <div class="input-group-addon bg-default">MB</div>
-          </div>
-        </div>
+        {{input type="text"
+            class="form-control"
+            value=model.%%DRIVERNAME%%Config.endpoint
+          }}
+
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <p class="form-control-static help-block">Nutanix management endpoint ip address/FQDN:9440</p>
       </div>
     </div>
 
-    {{!-- This following contains the Name, Labels and Engine Options fields --}}
-    <div class="over-hr"><span>{{templateOptionsTitle}}</span></div>
+    <div class="row">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">Username</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text"
+            class="form-control"
+            value=model.%%DRIVERNAME%%Config.username
+          }}
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <p class="form-control-static help-block">Nutanix management username</p>
+      </div>
+    </div>
 
-    {{form-name-description
+    <div class="row">
+      <div class="col-sm-12 col-md-2 form-label">
+        <label class="form-control-static">Password</label>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        {{input type="text"
+            class="form-control"
+            value=model.%%DRIVERNAME%%Config.password
+          }}
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <p class="form-control-static help-block">Nutanix management password</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">vCPU</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text"
+            class="form-control"
+            value=model.%%DRIVERNAME%%Config.vmCpus
+          }}
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <p class="form-control-static help-block">Number of VCPUs of the VM to be created</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">vCORE</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text"
+            class="form-control"
+            value=model.%%DRIVERNAME%%Config.vmCores
+          }}
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <p class="form-control-static help-block">Number of cores per VCPU of the VM to be created</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">VM Memory</label>
+      </div>
+      <div class="col-md-4">
+        <div class="input-group">
+          {{input type="text"
+            class="form-control"
+            value=model.%%DRIVERNAME%%Config.vmMem
+          }}
+          <span class="input-group-addon">MB</span>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <p class="form-control-static help-block">Memory of the VM to be created (MB)</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">VM Image</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text"
+            class="form-control"
+            value=model.%%DRIVERNAME%%Config.vmImage
+          }}
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <p class="form-control-static help-block">The name of the VM disks to clone from, for the newly created VM</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">VM Network</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text"
+            class="form-control"
+            value=model.%%DRIVERNAME%%Config.vmNetwork
+          }}
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <p class="form-control-static help-block">The name of the network to attach to the newly created VM</p>
+      </div>
+    </div>
+
+
+      {{!-- This following contains the Name, Labels and Engine Options fields --}}
+      <div class="over-hr"><span>{{templateOptionsTitle}}</span></div>
+
+      {{form-name-description
       model=model
       nameRequired=true
     }}
 
-    {{form-user-labels
+      {{form-user-labels
       initialLabels=labelResource.labels
       setLabels=(action 'setLabels')
       expandAll=expandAll
       expand=(action expandFn)
     }}
 
-    {{form-engine-opts
+      {{form-engine-opts
       machine=model
       showEngineUrl=showEngineUrl
     }}
-  {{/accordion-list}}
 
-  {{!-- This component shows errors produced by validate() in the component --}}
-  {{top-errors errors=errors}}
+      {{!-- This component shows errors produced by validate() in the component --}}
+      {{top-errors errors=errors}}
 
-  {{!-- This component shows the Create and Cancel buttons --}}
-  {{save-cancel save="save" cancel="cancel"}}
+      {{!-- This component shows the Create and Cancel buttons --}}
+      {{save-cancel save="save" cancel=(action "cancel")}}
+  </div>
 </section>
