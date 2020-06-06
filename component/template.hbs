@@ -43,7 +43,7 @@
         <label class="form-control-static">Password</label>
       </div>
       <div class="col-sm-12 col-md-4">
-        {{input type="text"
+        {{input type="password"
             class="form-control"
             value=model.%%DRIVERNAME%%Config.password
           }}
@@ -132,30 +132,30 @@
     </div>
 
 
-      {{!-- This following contains the Name, Labels and Engine Options fields --}}
-      <div class="over-hr"><span>{{templateOptionsTitle}}</span></div>
+    {{!-- This following contains the Name, Labels and Engine Options fields --}}
+    <div class="over-hr"><span>{{templateOptionsTitle}}</span></div>
 
-      {{form-name-description
+    {{form-name-description
       model=model
       nameRequired=true
     }}
 
-      {{form-user-labels
+    {{form-user-labels
       initialLabels=labelResource.labels
       setLabels=(action 'setLabels')
       expandAll=expandAll
       expand=(action expandFn)
     }}
 
-      {{form-engine-opts
+    {{form-engine-opts
       machine=model
       showEngineUrl=showEngineUrl
     }}
 
-      {{!-- This component shows errors produced by validate() in the component --}}
-      {{top-errors errors=errors}}
+    {{!-- This component shows errors produced by validate() in the component --}}
+    {{top-errors errors=errors}}
 
-      {{!-- This component shows the Create and Cancel buttons --}}
-      {{save-cancel save="save" cancel=(action "cancel")}}
+    {{!-- This component shows the Create and Cancel buttons --}}
+    {{save-cancel save="save" cancel=(action "cancel")}}
   </div>
 </section>
