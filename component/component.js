@@ -67,6 +67,10 @@ export default Ember.Component.extend(NodeDriver, {
       this.set('model.%%DRIVERNAME%%Config.networks', [])
     }
 
+    if (!this.get('model.%%DRIVERNAME%%Config.serverLabel')) {
+      this.set('model.%%DRIVERNAME%%Config.serverLabel', [])
+    }
+
     var errors = get(this, 'errors') || [];
     if (!get(this, 'model.name')) {
       errors.push('Name is required');
@@ -117,10 +121,10 @@ export default Ember.Component.extend(NodeDriver, {
       this.set('model.%%DRIVERNAME%%Config.networks', options);
     },
     setLabels: function(labels){
-      let labels_list = labels.map(l => l.key + "=" + l.value)
+      let labels_list = labels.map(l => l.key + "=" + l.value);
       this.set('model.%%DRIVERNAME%%Config.serverLabel', labels_list);
 
-      this._super(labels)
+      this._super(labels);
     },
   },
   apiRequest(path) {
