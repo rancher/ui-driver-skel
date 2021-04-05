@@ -78,7 +78,7 @@
         <textarea value={{model.hetznerConfig.userData}} onchange={{action (mut model.hetznerConfig.userData) value="target.value" }} rows="3" style="width: 100%; resize: vertical"></textarea>
       </div>
       <div class="col-md-2">
-        <label class="form-control-static">Networks (Beta, optional. You have to create these Networks in the <a href="https://console.hetzner.cloud" target="_blank" rel="noopener noreferrer">Hetzner Cloud Console</a>)</label>
+        <label class="form-control-static">Networks (Optional. You have to create these Networks in the <a href="https://console.hetzner.cloud" target="_blank" rel="noopener noreferrer">Hetzner Cloud Console</a>)</label>
       </div>
       <div class="col-md-4">
         <select class="form-control" onchange={{action 'modifyNetworks' }} multiple="true">
