@@ -1,5 +1,5 @@
 {
-  "name": "ui-proxmox",
+  "name": "ui-driver-proxmox",
   "version": "0.0.1",
   "description": "Skeleton Rancher UI driver for custom docker-machine drivers",
   "repository": {
